@@ -34,6 +34,13 @@
 			remoteGlobalIDString = B5452DC01961F1FA002A1C36;
 			remoteInfo = "Super Maze";
 		};
+		BAE8FE651962B69600D28603 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5452DB91961F1FA002A1C36 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5452DC01961F1FA002A1C36;
+			remoteInfo = "Super Maze";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -140,6 +147,7 @@
 				B5452DD01961F1FA002A1C36 /* PBXTargetDependency */,
 				B5452DDF1961F20D002A1C36 /* PBXTargetDependency */,
 				BAD4CCF51962B53200A364ED /* PBXTargetDependency */,
+				BAE8FE661962B69600D28603 /* PBXTargetDependency */,
 			);
 			name = "Super MazeTests";
 			productName = "Super MazeTests";
@@ -234,6 +242,11 @@
 			isa = PBXTargetDependency;
 			target = B5452DC01961F1FA002A1C36 /* Super Maze */;
 			targetProxy = BAD4CCF41962B53200A364ED /* PBXContainerItemProxy */;
+		};
+		BAE8FE661962B69600D28603 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5452DC01961F1FA002A1C36 /* Super Maze */;
+			targetProxy = BAE8FE651962B69600D28603 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
