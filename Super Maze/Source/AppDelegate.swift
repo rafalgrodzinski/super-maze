@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.makeKeyAndVisible()
         
+        var m = Maze(thetaWithLevelMultipliers: [1, 4, 2])
+        
         return true
     }
     

@@ -9,57 +9,21 @@
 /* Begin PBXBuildFile section */
 		B5452DC71961F1FA002A1C36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5452DC61961F1FA002A1C36 /* AppDelegate.swift */; };
 		B5452DC91961F1FA002A1C36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5452DC81961F1FA002A1C36 /* Images.xcassets */; };
-		BAD4CCF11962B50E00A364ED /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAD4CCF01962B50E00A364ED /* Info.plist */; };
+		BAE8FE6D1962CA7900D28603 /* MazeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE8FE6C1962CA7900D28603 /* MazeNode.swift */; };
+		BAE8FE6F1962CCCA00D28603 /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE8FE6E1962CCCA00D28603 /* Maze.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		B5452DCF1961F1FA002A1C36 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5452DB91961F1FA002A1C36 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5452DC01961F1FA002A1C36;
-			remoteInfo = "Super Maze";
-		};
-		B5452DDE1961F20D002A1C36 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5452DB91961F1FA002A1C36 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5452DC01961F1FA002A1C36;
-			remoteInfo = "Super Maze";
-		};
-		BAD4CCF41962B53200A364ED /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5452DB91961F1FA002A1C36 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5452DC01961F1FA002A1C36;
-			remoteInfo = "Super Maze";
-		};
-		BAE8FE651962B69600D28603 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5452DB91961F1FA002A1C36 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5452DC01961F1FA002A1C36;
-			remoteInfo = "Super Maze";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B5452DC11961F1FA002A1C36 /* Super Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Super Maze.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5452DC61961F1FA002A1C36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Source/AppDelegate.swift; sourceTree = "<group>"; };
 		B5452DC81961F1FA002A1C36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Super Maze/Resources/Images.xcassets"; sourceTree = "<group>"; };
-		B5452DCE1961F1FA002A1C36 /* Super MazeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Super MazeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD4CCF01962B50E00A364ED /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Super Maze/Supporting Files/Info.plist"; sourceTree = "<group>"; };
+		BAE8FE6C1962CA7900D28603 /* MazeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MazeNode.swift; path = Source/Maze/MazeNode.swift; sourceTree = "<group>"; };
+		BAE8FE6E1962CCCA00D28603 /* Maze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Maze.swift; path = Source/Maze/Maze.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B5452DBE1961F1FA002A1C36 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5452DCB1961F1FA002A1C36 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -83,7 +47,6 @@
 			isa = PBXGroup;
 			children = (
 				B5452DC11961F1FA002A1C36 /* Super Maze.app */,
-				B5452DCE1961F1FA002A1C36 /* Super MazeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				B5452DC61961F1FA002A1C36 /* AppDelegate.swift */,
+				BAE8FE6B1962CA5300D28603 /* Maze */,
 			);
 			name = Source;
 			path = "Super Maze";
@@ -111,6 +75,15 @@
 				B5452DC81961F1FA002A1C36 /* Images.xcassets */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		BAE8FE6B1962CA5300D28603 /* Maze */ = {
+			isa = PBXGroup;
+			children = (
+				BAE8FE6E1962CCCA00D28603 /* Maze.swift */,
+				BAE8FE6C1962CA7900D28603 /* MazeNode.swift */,
+			);
+			name = Maze;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,27 +106,6 @@
 			productReference = B5452DC11961F1FA002A1C36 /* Super Maze.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B5452DCD1961F1FA002A1C36 /* Super MazeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B5452DDB1961F1FA002A1C36 /* Build configuration list for PBXNativeTarget "Super MazeTests" */;
-			buildPhases = (
-				B5452DCA1961F1FA002A1C36 /* Sources */,
-				B5452DCB1961F1FA002A1C36 /* Frameworks */,
-				B5452DCC1961F1FA002A1C36 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B5452DD01961F1FA002A1C36 /* PBXTargetDependency */,
-				B5452DDF1961F20D002A1C36 /* PBXTargetDependency */,
-				BAD4CCF51962B53200A364ED /* PBXTargetDependency */,
-				BAE8FE661962B69600D28603 /* PBXTargetDependency */,
-			);
-			name = "Super MazeTests";
-			productName = "Super MazeTests";
-			productReference = B5452DCE1961F1FA002A1C36 /* Super MazeTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -166,10 +118,6 @@
 					B5452DC01961F1FA002A1C36 = {
 						CreatedOnToolsVersion = 6.0;
 					};
-					B5452DCD1961F1FA002A1C36 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = B5452DC01961F1FA002A1C36;
-					};
 				};
 			};
 			buildConfigurationList = B5452DBC1961F1FA002A1C36 /* Build configuration list for PBXProject "Super Maze" */;
@@ -177,7 +125,6 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 			);
 			mainGroup = B5452DB81961F1FA002A1C36;
 			productRefGroup = B5452DC21961F1FA002A1C36 /* Products */;
@@ -185,7 +132,6 @@
 			projectRoot = "";
 			targets = (
 				B5452DC01961F1FA002A1C36 /* Super Maze */,
-				B5452DCD1961F1FA002A1C36 /* Super MazeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -195,15 +141,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAD4CCF11962B50E00A364ED /* Info.plist in Resources */,
 				B5452DC91961F1FA002A1C36 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5452DCC1961F1FA002A1C36 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,41 +152,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAE8FE6D1962CA7900D28603 /* MazeNode.swift in Sources */,
 				B5452DC71961F1FA002A1C36 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5452DCA1961F1FA002A1C36 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				BAE8FE6F1962CCCA00D28603 /* Maze.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B5452DD01961F1FA002A1C36 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5452DC01961F1FA002A1C36 /* Super Maze */;
-			targetProxy = B5452DCF1961F1FA002A1C36 /* PBXContainerItemProxy */;
-		};
-		B5452DDF1961F20D002A1C36 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5452DC01961F1FA002A1C36 /* Super Maze */;
-			targetProxy = B5452DDE1961F20D002A1C36 /* PBXContainerItemProxy */;
-		};
-		BAD4CCF51962B53200A364ED /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5452DC01961F1FA002A1C36 /* Super Maze */;
-			targetProxy = BAD4CCF41962B53200A364ED /* PBXContainerItemProxy */;
-		};
-		BAE8FE661962B69600D28603 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5452DC01961F1FA002A1C36 /* Super Maze */;
-			targetProxy = BAE8FE651962B69600D28603 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B5452DD61961F1FA002A1C36 /* Debug */ = {
@@ -335,7 +245,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				INFOPLIST_FILE = "Super Maze/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Super Maze/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -346,45 +256,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				INFOPLIST_FILE = "Super Maze/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Super Maze/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		B5452DDC1961F1FA002A1C36 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Super Maze.app/Super Maze";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Super MazeTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		B5452DDD1961F1FA002A1C36 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Super Maze.app/Super Maze";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Super MazeTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
 		};
@@ -405,15 +279,6 @@
 			buildConfigurations = (
 				B5452DD91961F1FA002A1C36 /* Debug */,
 				B5452DDA1961F1FA002A1C36 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B5452DDB1961F1FA002A1C36 /* Build configuration list for PBXNativeTarget "Super MazeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B5452DDC1961F1FA002A1C36 /* Debug */,
-				B5452DDD1961F1FA002A1C36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
