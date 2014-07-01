@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		B5452DC71961F1FA002A1C36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5452DC61961F1FA002A1C36 /* AppDelegate.swift */; };
 		B5452DC91961F1FA002A1C36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5452DC81961F1FA002A1C36 /* Images.xcassets */; };
-		B5452DD51961F1FA002A1C36 /* Super_MazeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5452DD41961F1FA002A1C36 /* Super_MazeTests.swift */; };
+		BAD4CCF11962B50E00A364ED /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAD4CCF01962B50E00A364ED /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,16 +27,21 @@
 			remoteGlobalIDString = B5452DC01961F1FA002A1C36;
 			remoteInfo = "Super Maze";
 		};
+		BAD4CCF41962B53200A364ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5452DB91961F1FA002A1C36 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5452DC01961F1FA002A1C36;
+			remoteInfo = "Super Maze";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B5452DC11961F1FA002A1C36 /* Super Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Super Maze.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5452DC51961F1FA002A1C36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5452DC61961F1FA002A1C36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5452DC81961F1FA002A1C36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B5452DC61961F1FA002A1C36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Source/AppDelegate.swift; sourceTree = "<group>"; };
+		B5452DC81961F1FA002A1C36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Super Maze/Resources/Images.xcassets"; sourceTree = "<group>"; };
 		B5452DCE1961F1FA002A1C36 /* Super MazeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Super MazeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5452DD31961F1FA002A1C36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5452DD41961F1FA002A1C36 /* Super_MazeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Super_MazeTests.swift; sourceTree = "<group>"; };
+		BAD4CCF01962B50E00A364ED /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Super Maze/Supporting Files/Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +65,9 @@
 		B5452DB81961F1FA002A1C36 = {
 			isa = PBXGroup;
 			children = (
-				B5452DC31961F1FA002A1C36 /* Super Maze */,
-				B5452DD11961F1FA002A1C36 /* Super MazeTests */,
+				B5452DC31961F1FA002A1C36 /* Source */,
+				BAD4CCF31962B51800A364ED /* Resources */,
+				BAD4CCF21962B51200A364ED /* Supporting Files */,
 				B5452DC21961F1FA002A1C36 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -75,39 +81,29 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B5452DC31961F1FA002A1C36 /* Super Maze */ = {
+		B5452DC31961F1FA002A1C36 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				B5452DC61961F1FA002A1C36 /* AppDelegate.swift */,
-				B5452DC81961F1FA002A1C36 /* Images.xcassets */,
-				B5452DC41961F1FA002A1C36 /* Supporting Files */,
 			);
+			name = Source;
 			path = "Super Maze";
 			sourceTree = "<group>";
 		};
-		B5452DC41961F1FA002A1C36 /* Supporting Files */ = {
+		BAD4CCF21962B51200A364ED /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B5452DC51961F1FA002A1C36 /* Info.plist */,
+				BAD4CCF01962B50E00A364ED /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B5452DD11961F1FA002A1C36 /* Super MazeTests */ = {
+		BAD4CCF31962B51800A364ED /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B5452DD41961F1FA002A1C36 /* Super_MazeTests.swift */,
-				B5452DD21961F1FA002A1C36 /* Supporting Files */,
+				B5452DC81961F1FA002A1C36 /* Images.xcassets */,
 			);
-			path = "Super MazeTests";
-			sourceTree = "<group>";
-		};
-		B5452DD21961F1FA002A1C36 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B5452DD31961F1FA002A1C36 /* Info.plist */,
-			);
-			name = "Supporting Files";
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +139,7 @@
 			dependencies = (
 				B5452DD01961F1FA002A1C36 /* PBXTargetDependency */,
 				B5452DDF1961F20D002A1C36 /* PBXTargetDependency */,
+				BAD4CCF51962B53200A364ED /* PBXTargetDependency */,
 			);
 			name = "Super MazeTests";
 			productName = "Super MazeTests";
@@ -190,6 +187,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAD4CCF11962B50E00A364ED /* Info.plist in Resources */,
 				B5452DC91961F1FA002A1C36 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,7 +214,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5452DD51961F1FA002A1C36 /* Super_MazeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +229,11 @@
 			isa = PBXTargetDependency;
 			target = B5452DC01961F1FA002A1C36 /* Super Maze */;
 			targetProxy = B5452DDE1961F20D002A1C36 /* PBXContainerItemProxy */;
+		};
+		BAD4CCF51962B53200A364ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5452DC01961F1FA002A1C36 /* Super Maze */;
+			targetProxy = BAD4CCF41962B53200A364ED /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
