@@ -40,14 +40,13 @@ class MazeNode {
     }
     
     
-    func connectPotentially(node: MazeNode?)
+    func connectPotentially(node: MazeNode)
     {
-        if node {
-            if self.potentialPaths[node!.position] == nil {
-                self.potentialPaths[node!.position] = node!
-                println("Connection between \(self.position.level)x\(self.position.index) and \(node!.position.level)x\(node!.position.index)")
-                node!.potentialPaths[self.position] = self
-            }
+        if node.position != self.position && self.potentialPaths[node.position] == nil {
+            self.potentialPaths[node.position] = node
+            node.potentialPaths[self.position] = self
+            
+            println("Potential path between \(self.position.level)x\(self.position.index) and \(node.position.level)x\(node.position.index)")
         }
     }
 }

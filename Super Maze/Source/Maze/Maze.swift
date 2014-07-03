@@ -25,18 +25,11 @@ class Maze {
         
         var nodes: Dictionary<MazeNodePosition, MazeNode> = [:]
         
-        //initial node
-        /*let initialNodePosition = MazeNodePosition(level: 0, index: 0)
-        let initialNode = MazeNode(position: initialNodePosition)
-        nodes[initialNodePosition] = initialNode*/
-        
-        //rest of the nodes
+        //first create the nodes
         var indexesCount = 1;
-        var level: Int
-        for level in 0..levelMultipliers.count {
+        for var level=0; level<levelMultipliers.count; level++ {
             indexesCount *= levelMultipliers[level]
-            var index: Int
-            for index in 0..indexesCount {
+            for var index=0; index<indexesCount; index++ {
                 var nodePosition = MazeNodePosition(level: level, index: index)
                 var node = MazeNode(position: nodePosition)
                 nodes[nodePosition] = node
@@ -46,21 +39,35 @@ class Maze {
         //now connect all the nodes with potential paths
         indexesCount = 1;
         for var level=0; level<levelMultipliers.count; level++ {
-            let nextLevelMultiplier = levelMultipliers[level+1]
-            
+            indexesCount *= levelMultipliers[level];
             for var index=0; index<indexesCount; index++ {
                 let node = nodes[MazeNodePosition(level: level, index: index)]
-                for var nextIndex=0; nextIndex<nextLevelMultiplier; nextIndex++ {
-                    let anotherNode = nodes[MazeNodePosition(level: level+1, index: nextLevelMultiplier*index + nextIndex)]
-                    
-                    node!.connectPotentially(anotherNode)
-                }
                 
-                let rightNode = nodes[MazeNodePosition(level: level, index: index+1)]
-                node!.connectPotentially(rightNode)
+                //try to connect with left neighbour
+                var leftIndex = index-1;
+                if leftIndex < 0 {
+                    leftIndex = indexesCount-1
+                }
+                node!.connectPotentially(nodes[MazeNodePosition(level: level, index: leftIndex)]!)
+                
+                //try to connect with right neighbour
+                var rightIndex = index+1;
+                if rightIndex >= indexesCount {
+                    rightIndex = 0
+                }
+                node!.connectPotentially(nodes[MazeNodePosition(level: level, index: rightIndex)]!)
+                
+                //then connect with nodes at higher level (if there is a higher level
+                if level < levelMultipliers.count-1 {
+                    let nextLevelMultiplier = levelMultipliers[level+1]
+
+                    for var nextIndex=0; nextIndex<nextLevelMultiplier; nextIndex++ {
+                        let anotherNode = nodes[MazeNodePosition(level: level+1, index: nextLevelMultiplier*index + nextIndex)]
+                        
+                        node!.connectPotentially(nodes[MazeNodePosition(level: level+1, index: index*nextLevelMultiplier + nextIndex)]!)
+                    }
+                }
             }
-            
-            indexesCount *= levelMultipliers[level+1]
         }
         
         self.nodes = nodes
