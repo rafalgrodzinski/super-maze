@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.makeKeyAndVisible()
         
-        var m = Maze(thetaWithLevelMultipliers: [1, 4, 2])
+        var m = Maze(thetaWithLevelMultipliers: [1, 4, 2, 1, 2])
+        m.generateMaze(fromNode: m.nodes[MazeNodePosition(level: 0, index: 0)]!, usingAlgorithm: .RecursiveBacktracker)
         
         return true
     }

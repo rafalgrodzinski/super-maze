@@ -14,6 +14,11 @@ enum MazeType {
 }
 
 
+enum MazeGenerationAlgorithm {
+    case RecursiveBacktracker
+}
+
+
 class Maze {
     let type: MazeType
     let nodes: Dictionary<MazeNodePosition, MazeNode>
@@ -71,5 +76,32 @@ class Maze {
         }
         
         self.nodes = nodes
+    }
+    
+    
+    func generateMaze(fromNode node: MazeNode, usingAlgorithm algorithm: MazeGenerationAlgorithm)
+    {
+        if algorithm == .RecursiveBacktracker {
+            var scrambledPotentialNodes: Array<MazeNode> = []
+            var nodeToScramble: MazeNode
+            for nodeToScramble in node.potentialPaths.values {
+                scrambledPotentialNodes += nodeToScramble
+            }
+            
+            for var i=0; i<scrambledPotentialNodes.count; i++ {
+                var tempNode = scrambledPotentialNodes[i]
+                var randomIndex = Int(arc4random_uniform(UInt32(scrambledPotentialNodes.count)))
+                
+                scrambledPotentialNodes[i] = scrambledPotentialNodes[randomIndex]
+                scrambledPotentialNodes[randomIndex] = tempNode
+            }
+            
+            var potentialNode: MazeNode
+            for potentialNode in scrambledPotentialNodes {
+                if node.tryConnecting(potentialNode) {
+                    generateMaze(fromNode: potentialNode, usingAlgorithm: algorithm)
+                }
+            }
+        }
     }
 }

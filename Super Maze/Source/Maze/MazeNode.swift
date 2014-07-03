@@ -32,6 +32,7 @@ class MazeNode {
 
     var potentialPaths: Dictionary<MazeNodePosition, MazeNode> = [:]
     var paths: Dictionary<MazeNodePosition, MazeNode> = [:]
+    var visited: Bool = false
 
 
     init(position: MazeNodePosition)
@@ -48,5 +49,22 @@ class MazeNode {
             
             println("Potential path between \(self.position.level)x\(self.position.index) and \(node.position.level)x\(node.position.index)")
         }
+    }
+    
+    
+    func tryConnecting(node: MazeNode) -> Bool
+    {
+        if node.position != self.position && self.paths[node.position] == nil && !node.visited {
+            self.paths[node.position] = node
+            node.paths[self.position] = self
+            node.visited = true
+            self.visited = true
+            
+            println("Path between \(self.position.level)x\(self.position.index) and \(node.position.level)x\(node.position.index)")
+            
+            return true
+        }
+        
+        return false
     }
 }
