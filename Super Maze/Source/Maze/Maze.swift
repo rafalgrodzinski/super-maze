@@ -21,14 +21,16 @@ enum MazeGenerationAlgorithm {
 
 class Maze {
     let type: MazeType
-    let nodes: Dictionary<MazeNodePosition, MazeNode>
+    let nodes: [MazeNodePosition : MazeNode]
+    let levelMultipliers: [Int]
 
     
-    init(thetaWithLevelMultipliers levelMultipliers: Int[])
+    init(thetaWithLevelMultipliers levelMultipliers: [Int])
     {
         type = .Theta
+        self.levelMultipliers = levelMultipliers
         
-        var nodes: Dictionary<MazeNodePosition, MazeNode> = [:]
+        var nodes: [MazeNodePosition : MazeNode] = [:]
         
         //first create the nodes
         var indexesCount = 1;

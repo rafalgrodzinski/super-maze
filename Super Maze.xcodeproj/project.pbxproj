@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B50B0797196830A50071FBD3 /* MazeRenderer2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B0796196830A50071FBD3 /* MazeRenderer2D.swift */; };
 		B5452DC71961F1FA002A1C36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5452DC61961F1FA002A1C36 /* AppDelegate.swift */; };
 		B5452DC91961F1FA002A1C36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5452DC81961F1FA002A1C36 /* Images.xcassets */; };
 		BAE8FE6D1962CA7900D28603 /* MazeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE8FE6C1962CA7900D28603 /* MazeNode.swift */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B50B0796196830A50071FBD3 /* MazeRenderer2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MazeRenderer2D.swift; path = Source/Renderer/MazeRenderer2D.swift; sourceTree = "<group>"; };
 		B5452DC11961F1FA002A1C36 /* Super Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Super Maze.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5452DC61961F1FA002A1C36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Source/AppDelegate.swift; sourceTree = "<group>"; };
 		B5452DC81961F1FA002A1C36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Super Maze/Resources/Images.xcassets"; sourceTree = "<group>"; };
@@ -33,6 +35,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B50B079519682FE10071FBD3 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				B50B0796196830A50071FBD3 /* MazeRenderer2D.swift */,
+			);
+			name = Renderer;
+			sourceTree = "<group>";
+		};
 		B5452DB81961F1FA002A1C36 = {
 			isa = PBXGroup;
 			children = (
@@ -55,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				B5452DC61961F1FA002A1C36 /* AppDelegate.swift */,
+				B50B079519682FE10071FBD3 /* Renderer */,
 				BAE8FE6B1962CA5300D28603 /* Maze */,
 			);
 			name = Source;
@@ -125,6 +136,9 @@
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
 			mainGroup = B5452DB81961F1FA002A1C36;
 			productRefGroup = B5452DC21961F1FA002A1C36 /* Products */;
 			projectDirPath = "";
@@ -168,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAE8FE6D1962CA7900D28603 /* MazeNode.swift in Sources */,
+				B50B0797196830A50071FBD3 /* MazeRenderer2D.swift in Sources */,
 				B5452DC71961F1FA002A1C36 /* AppDelegate.swift in Sources */,
 				BAE8FE6F1962CCCA00D28603 /* Maze.swift in Sources */,
 			);
@@ -264,7 +279,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -277,7 +292,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
