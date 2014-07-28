@@ -58,8 +58,6 @@ class MazeNode {
             node.visited = true
             self.visited = true
             
-            println("Path between \(self.position.level)x\(self.position.index) and \(node.position.level)x\(node.position.index)")
-            
             return true
         }
         

@@ -28,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window!.rootViewController = vc
         
+        //let a = Utils.verticesFromAngle(fromAngle: 30.0, toAngle: 160.0, subdivision: 5, radius: 100.0)
+        
         return true
     }
     

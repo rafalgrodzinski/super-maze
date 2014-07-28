@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Foundation
 
 
 class MazeRenderer2D: UIView {
     let maze: Maze
-    let levelSize: Double
+    let levelSize: CGFloat
 
-    init(frame: CGRect, maze: Maze, levelSize: Double)
+    init(frame: CGRect, maze: Maze, levelSize: CGFloat)
     {
         self.maze = maze
         self.levelSize = levelSize
@@ -45,7 +46,7 @@ class MazeRenderer2D: UIView {
         for var level=0; level<maze.levelMultipliers.count; level++ {
             indexesCount *= maze.levelMultipliers[level]
             
-            let anglePerNode: Double = 360.0/Double(indexesCount)
+            let anglePerNode: CGFloat = 360.0/CGFloat(indexesCount)
             
             for var index=0; index<indexesCount; index++ {
                 let node = maze.nodes[MazeNodePosition(level: level, index: index)]!
@@ -59,15 +60,19 @@ class MazeRenderer2D: UIView {
                 if rightIndex != index && !node.paths[MazeNodePosition(level: level, index: rightIndex)] {
                         //draw wall to the right
                         
-                        let angle = anglePerNode * Double(index+1)
-                        let startX = Double(level)*self.levelSize * sin(angle * M_PI/180.0)
-                        let startY = Double(level)*self.levelSize * cos(angle * M_PI/180.0)
+                    let angle: CGFloat = anglePerNode * CGFloat(index+1);
+                    
+                        let startPoint = Utils.pointAtPolygon(angle, subdivision: 20, radius: CGFloat(level)*self.levelSize)
+                        let endPoint = Utils.pointAtPolygon(angle, subdivision: 20, radius: CGFloat(level+1)*self.levelSize)
+
+                        /*let startX = CGFloat(level)*self.levelSize * sin(angle * CGFloat(M_PI/180.0))
+                        let startY = CGFloat(level)*self.levelSize * cos(angle * CGFloat(M_PI/180.0))
                         
-                        let endX = Double(level+1)*self.levelSize * sin(angle * M_PI/180.0)
-                        let endY = Double(level+1)*self.levelSize * cos(angle * M_PI/180.0)
+                        let endX = CGFloat(level+1)*self.levelSize * sin(angle * CGFloat(M_PI/180.0))
+                        let endY = CGFloat(level+1)*self.levelSize * cos(angle * CGFloat(M_PI/180.0))*/
                         
-                        CGContextMoveToPoint(ctx, startX, startY)
-                        CGContextAddLineToPoint(ctx, endX, endY)
+                        CGContextMoveToPoint(ctx, startPoint.x, startPoint.y)
+                        CGContextAddLineToPoint(ctx, endPoint.x, endPoint.y)
 
                         CGContextStrokePath(ctx)
                 }
@@ -78,21 +83,32 @@ class MazeRenderer2D: UIView {
                     mazePath = CGPathCreateMutable()
                     //draw wall with space if there is connection
                     if node.paths[MazeNodePosition(level: level+1, index: index*nextLevelMultiplier + nextIndex)] {
-                        /*let startAngle: Double = Double(index)*anglePerNode + Double(nextIndex)*(anglePerNode/Double(nextLevelMultiplier))
-                        let endAngle: Double = Double(index)*anglePerNode + (Double(nextIndex)+1.0)*(anglePerNode/Double(nextLevelMultiplier))
-                        let radius: Double = Double(level+1)*self.levelSize
+                        /*let startAngle: CGFloat = CGFloat(index)*anglePerNode + CGFloat(nextIndex)*(anglePerNode/CGFloat(nextLevelMultiplier))
+                        let endAngle: CGFloat = CGFloat(index)*anglePerNode + (CGFloat(nextIndex)+1.0)*(anglePerNode/CGFloat(nextLevelMultiplier))
+                        let radius: CGFloat = CGFloat(level+1)*self.levelSize
                         
                         CGPathAddArc(mazePath, nil, 0.0, 0.0, radius, (90.0-startAngle)*M_PI/180.0,
                             (90.0-endAngle)*M_PI/180.0, true)*/
                     //otherwise, draw full wall
                     } else {
-                        let startAngle: Double = Double(index)*anglePerNode + Double(nextIndex)*(anglePerNode/Double(nextLevelMultiplier))
-                        let endAngle: Double = Double(index)*anglePerNode + (Double(nextIndex)+1.0)*(anglePerNode/Double(nextLevelMultiplier))
+                        let startAngle: CGFloat = CGFloat(index)*anglePerNode + CGFloat(nextIndex)*(anglePerNode/CGFloat(nextLevelMultiplier))
+                        let endAngle: CGFloat = CGFloat(index)*anglePerNode + (CGFloat(nextIndex)+1.0)*(anglePerNode/CGFloat(nextLevelMultiplier))
                         
-                        let radius: Double = Double(level+1)*self.levelSize
-                        CGPathAddArc(mazePath, nil, 0.0, 0.0, radius,
-                            (90.0-startAngle)*M_PI/180.0,
-                            (90.0-endAngle)*M_PI/180.0, true)
+                        let radius: CGFloat = CGFloat(level+1)*self.levelSize
+                        
+                        let verts = Utils.verticesFromAngle(fromAngle: startAngle, toAngle: endAngle, subdivision: 20, radius: radius)
+                        let first: CGPoint = verts[0]
+                        CGContextMoveToPoint(ctx, first.x, first.y)
+                        var i: Int
+                        for i = 1; i<verts.count; i++ {
+                            let point: CGPoint = verts[i]
+                            CGContextAddLineToPoint(ctx, point.x, point.y)
+                        }
+    
+                        /*CGPathAddArc(mazePath, nil, 0.0, 0.0, radius,
+                            CGFloat(90.0 - startAngle) * CGFloat(M_PI/180.0),
+                            CGFloat(90.0-endAngle) * CGFloat(M_PI/180.0),
+                            true)*/
                     }
                     CGContextAddPath(ctx, mazePath)
                     CGContextStrokePath(ctx)

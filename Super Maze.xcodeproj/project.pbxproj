@@ -10,6 +10,7 @@
 		B50B0797196830A50071FBD3 /* MazeRenderer2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B0796196830A50071FBD3 /* MazeRenderer2D.swift */; };
 		B5452DC71961F1FA002A1C36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5452DC61961F1FA002A1C36 /* AppDelegate.swift */; };
 		B5452DC91961F1FA002A1C36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5452DC81961F1FA002A1C36 /* Images.xcassets */; };
+		B5E28DD5198558A900DA7164 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E28DD4198558A900DA7164 /* Utils.swift */; };
 		BAE8FE6D1962CA7900D28603 /* MazeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE8FE6C1962CA7900D28603 /* MazeNode.swift */; };
 		BAE8FE6F1962CCCA00D28603 /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE8FE6E1962CCCA00D28603 /* Maze.swift */; };
 /* End PBXBuildFile section */
@@ -19,6 +20,7 @@
 		B5452DC11961F1FA002A1C36 /* Super Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Super Maze.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5452DC61961F1FA002A1C36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Source/AppDelegate.swift; sourceTree = "<group>"; };
 		B5452DC81961F1FA002A1C36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Super Maze/Resources/Images.xcassets"; sourceTree = "<group>"; };
+		B5E28DD4198558A900DA7164 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Source/Utils.swift; sourceTree = "<group>"; };
 		BAD4CCF01962B50E00A364ED /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Super Maze/Supporting Files/Info.plist"; sourceTree = "<group>"; };
 		BAE8FE6C1962CA7900D28603 /* MazeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MazeNode.swift; path = Source/Maze/MazeNode.swift; sourceTree = "<group>"; };
 		BAE8FE6E1962CCCA00D28603 /* Maze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Maze.swift; path = Source/Maze/Maze.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				B5452DC61961F1FA002A1C36 /* AppDelegate.swift */,
 				B50B079519682FE10071FBD3 /* Renderer */,
 				BAE8FE6B1962CA5300D28603 /* Maze */,
+				B5E28DD4198558A900DA7164 /* Utils.swift */,
 			);
 			name = Source;
 			path = "Super Maze";
@@ -181,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5E28DD5198558A900DA7164 /* Utils.swift in Sources */,
 				BAE8FE6D1962CA7900D28603 /* MazeNode.swift in Sources */,
 				B50B0797196830A50071FBD3 /* MazeRenderer2D.swift in Sources */,
 				B5452DC71961F1FA002A1C36 /* AppDelegate.swift in Sources */,
