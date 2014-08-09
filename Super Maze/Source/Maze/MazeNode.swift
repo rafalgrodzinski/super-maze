@@ -53,7 +53,7 @@ class MazeNode {
     
     func tryConnecting(node: MazeNode) -> Bool
     {
-        if node.position != self.position && self.paths[node.position] == nil && node.visited == nil {
+        if node.position != self.position && self.paths[node.position] == nil && !node.visited {
             self.paths[node.position] = node
             node.paths[self.position] = self
             node.visited = true

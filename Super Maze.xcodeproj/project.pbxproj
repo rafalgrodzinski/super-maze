@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B50B0797196830A50071FBD3 /* MazeRenderer2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B0796196830A50071FBD3 /* MazeRenderer2D.swift */; };
 		B5184CB5198E74F0009CCF56 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5184CB4198E74F0009CCF56 /* DebugView.swift */; };
 		B5184CB9198E7647009CCF56 /* Physics.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5184CB8198E7647009CCF56 /* Physics.mm */; };
 		B5184D22198E76E0009CCF56 /* Box2DConfig.cmake in Resources */ = {isa = PBXBuildFile; fileRef = B5184CBD198E76E0009CCF56 /* Box2DConfig.cmake */; };
@@ -67,11 +66,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B50B0796196830A50071FBD3 /* MazeRenderer2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MazeRenderer2D.swift; path = Source/Renderer/MazeRenderer2D.swift; sourceTree = "<group>"; };
-		B5184CB4198E74F0009CCF56 /* DebugView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugView.swift; path = Source/DebugView.swift; sourceTree = "<group>"; };
-		B5184CB6198E7647009CCF56 /* Super Maze-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Super Maze-Bridging-Header.h"; sourceTree = "<group>"; };
-		B5184CB7198E7647009CCF56 /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Physics.h; path = Source/Physics.h; sourceTree = "<group>"; };
-		B5184CB8198E7647009CCF56 /* Physics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Physics.mm; path = Source/Physics.mm; sourceTree = "<group>"; };
+		B5184CB4198E74F0009CCF56 /* DebugView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugView.swift; path = Source/Rendering/DebugView.swift; sourceTree = "<group>"; };
+		B5184CB6198E7647009CCF56 /* Super Maze-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Super Maze-Bridging-Header.h"; path = "Source/Super Maze-Bridging-Header.h"; sourceTree = "<group>"; };
+		B5184CB7198E7647009CCF56 /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Physics.h; path = Source/Game/Physics.h; sourceTree = "<group>"; };
+		B5184CB8198E7647009CCF56 /* Physics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Physics.mm; path = Source/Game/Physics.mm; sourceTree = "<group>"; };
 		B5184CBC198E76E0009CCF56 /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
 		B5184CBD198E76E0009CCF56 /* Box2DConfig.cmake */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Box2DConfig.cmake; sourceTree = "<group>"; };
 		B5184CBE198E76E0009CCF56 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
@@ -170,7 +168,7 @@
 		B5452DC11961F1FA002A1C36 /* Super Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Super Maze.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5452DC61961F1FA002A1C36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Source/AppDelegate.swift; sourceTree = "<group>"; };
 		B5452DC81961F1FA002A1C36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Super Maze/Resources/Images.xcassets"; sourceTree = "<group>"; };
-		B5C16ED7198ADB4E00EC65E6 /* GameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameVC.swift; path = Source/GameVC.swift; sourceTree = "<group>"; };
+		B5C16ED7198ADB4E00EC65E6 /* GameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameVC.swift; path = Source/Game/GameVC.swift; sourceTree = "<group>"; };
 		B5E28DD4198558A900DA7164 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Source/Utils.swift; sourceTree = "<group>"; };
 		BAD4CCF01962B50E00A364ED /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Super Maze/Supporting Files/Info.plist"; sourceTree = "<group>"; };
 		BAE8FE6C1962CA7900D28603 /* MazeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MazeNode.swift; path = Source/Maze/MazeNode.swift; sourceTree = "<group>"; };
@@ -188,14 +186,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B50B079519682FE10071FBD3 /* Renderer */ = {
-			isa = PBXGroup;
-			children = (
-				B50B0796196830A50071FBD3 /* MazeRenderer2D.swift */,
-			);
-			name = Renderer;
-			sourceTree = "<group>";
-		};
 		B5184CBA198E766D009CCF56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,18 +375,33 @@
 		B5452DC31961F1FA002A1C36 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				B5452DC61961F1FA002A1C36 /* AppDelegate.swift */,
-				B5C16ED7198ADB4E00EC65E6 /* GameVC.swift */,
-				B50B079519682FE10071FBD3 /* Renderer */,
-				BAE8FE6B1962CA5300D28603 /* Maze */,
-				B5E28DD4198558A900DA7164 /* Utils.swift */,
-				B5184CB4198E74F0009CCF56 /* DebugView.swift */,
-				B5184CB7198E7647009CCF56 /* Physics.h */,
-				B5184CB8198E7647009CCF56 /* Physics.mm */,
 				B5184CB6198E7647009CCF56 /* Super Maze-Bridging-Header.h */,
+				B5452DC61961F1FA002A1C36 /* AppDelegate.swift */,
+				B5E28DD4198558A900DA7164 /* Utils.swift */,
+				BAE8FE6B1962CA5300D28603 /* Maze */,
+				B591D362199695B0008C8366 /* Game */,
+				B591D363199695D5008C8366 /* Rendering */,
 			);
 			name = Source;
 			path = "Super Maze";
+			sourceTree = "<group>";
+		};
+		B591D362199695B0008C8366 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				B5C16ED7198ADB4E00EC65E6 /* GameVC.swift */,
+				B5184CB7198E7647009CCF56 /* Physics.h */,
+				B5184CB8198E7647009CCF56 /* Physics.mm */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
+		B591D363199695D5008C8366 /* Rendering */ = {
+			isa = PBXGroup;
+			children = (
+				B5184CB4198E74F0009CCF56 /* DebugView.swift */,
+			);
+			name = Rendering;
 			sourceTree = "<group>";
 		};
 		BAD4CCF21962B51200A364ED /* Supporting Files */ = {
@@ -530,7 +535,6 @@
 				B5184D4C198E76E0009CCF56 /* b2PulleyJoint.cpp in Sources */,
 				B5184D43198E76E0009CCF56 /* b2PolygonAndCircleContact.cpp in Sources */,
 				B5184D45198E76E0009CCF56 /* b2DistanceJoint.cpp in Sources */,
-				B50B0797196830A50071FBD3 /* MazeRenderer2D.swift in Sources */,
 				B5184D51198E76E0009CCF56 /* b2Rope.cpp in Sources */,
 				B5184D47198E76E0009CCF56 /* b2GearJoint.cpp in Sources */,
 				B5184D36198E76E0009CCF56 /* b2Body.cpp in Sources */,
@@ -608,6 +612,7 @@
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Super Maze/Source/Super Maze-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Super\\ Maze/Frameworks/**";
@@ -645,6 +650,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Super Maze/Source/Super Maze-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Super\\ Maze/Frameworks/**";
 				VALIDATE_PRODUCT = YES;
@@ -662,7 +668,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Super Maze/Super Maze-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited)";
@@ -680,7 +686,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Super Maze/Super Maze-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(inherited)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 			};

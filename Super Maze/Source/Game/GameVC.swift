@@ -63,6 +63,7 @@ class GameVC: UIViewController {
     override func viewDidLoad()
     {
         self.maze = Maze(thetaWithLevelMultipliers: [1, 4, 2, 1, 2])
+        self.maze?.generateMaze(fromNode: self.maze!.nodes[MazeNodePosition(level: 0, index: 0)]!, usingAlgorithm: .RecursiveBacktracker)
         self.physics = Physics(maze: self.maze)
         
         self.motionManager = CMMotionManager()
@@ -99,6 +100,8 @@ class GameVC: UIViewController {
         }
         
         self.physics?.updateWithInterval(CGFloat(self.displayLink!.duration), rotation: self.rotation)
+        
+        (self.gameView as DebugView).maze = self.maze
         
         (self.gameView as DebugView).ballPosition = self.physics!.ballPosition
         (self.gameView as DebugView).ballDiameter = self.physics!.ballDiameter
