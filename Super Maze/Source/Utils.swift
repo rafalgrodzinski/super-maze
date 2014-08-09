@@ -43,17 +43,17 @@ class Utils {
         
         if firstAngle != startAngle {
             let vert = pointAtPolygon(startAngle, subdivision: subdivision, radius: radius)
-            vertices += vert
+            vertices.append(vert)
         }
         
         for var angle = firstAngle; angle <= endAngle; angle += anglePerPoly {
             let vert = pointAtPolygon(angle, subdivision: subdivision, radius: radius)
-            vertices += vert
+            vertices.append(vert)
         }
         
         if lastAngle != endAngle {
             let vert = pointAtPolygon(endAngle, subdivision: subdivision, radius: radius)
-            vertices += vert
+            vertices.append(vert)
         }
         
         return vertices

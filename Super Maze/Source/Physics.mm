@@ -16,6 +16,7 @@
 
 @property (nonatomic, assign) b2World *world;
 @property (nonatomic, assign) b2Body *ball;
+@property (nonatomic, assign) b2Body *maze;
 
 @end
 
@@ -55,7 +56,17 @@
 
 - (void)setupMaze
 {
+    /*b2BodyDef mazeDef;
+    mazeDef.type = b2_kinematicBody;
     
+    self.maze = self.world->CreateBody(&mazeDef);
+    
+    b2PolygonShape poly;
+    poly.Set(<#const b2Vec2 *points#>, <#int32 count#>)
+    
+    b2FixtureDef mazeFixture;
+    
+    self.maze->CreateFixture(&mazeFixture);*/
 }
 
 
@@ -65,7 +76,8 @@
 
     b2BodyDef ballDef;
     ballDef.type = b2_dynamicBody;
-    ballDef.angle = (45.0*180.0)/M_PI;
+    ballDef.linearDamping = 1.0;
+    //ballDef.angle = (45.0*180.0)/M_PI;
     self.ball = self.world->CreateBody(&ballDef);
     
     b2CircleShape ballShape;
@@ -97,7 +109,7 @@
 #pragma mark - Update
 - (void)updateWithInterval:(CGFloat)interval_ rotation:(CGPoint)rotation_
 {
-    self.ball->ApplyForceToCenter(b2Vec2(rotation_.x, rotation_.y), true);
+    self.ball->ApplyForceToCenter(b2Vec2(rotation_.x*4.0, rotation_.y*4.0), true);
     self.world->Step(interval_, 8, 3);
 }
 

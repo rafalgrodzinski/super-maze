@@ -20,7 +20,8 @@ struct MazeNodePosition : Hashable, Equatable {
     }
 }
 
-@infix func ==(left: MazeNodePosition, right: MazeNodePosition) -> Bool
+
+func ==(left: MazeNodePosition, right: MazeNodePosition) -> Bool
 {
     return left.level == right.level && left.index == right.index
 }
@@ -43,7 +44,7 @@ class MazeNode {
     
     func connectPotentially(node: MazeNode)
     {
-        if node.position != self.position &&  !self.potentialPaths[node.position]{
+        if node.position != self.position && self.potentialPaths[node.position] == nil {
             self.potentialPaths[node.position] = node
             node.potentialPaths[self.position] = self
         }
@@ -52,7 +53,7 @@ class MazeNode {
     
     func tryConnecting(node: MazeNode) -> Bool
     {
-        if node.position != self.position && !self.paths[node.position] && !node.visited {
+        if node.position != self.position && self.paths[node.position] == nil && node.visited == nil {
             self.paths[node.position] = node
             node.paths[self.position] = self
             node.visited = true

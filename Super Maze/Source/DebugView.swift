@@ -14,7 +14,13 @@ class DebugView: UIView {
     var ballDiameter: CGFloat = 0.0
     var ballAngle: CGFloat = 0.0
     
-    init(frame: CGRect)
+    
+    required init(coder aDecoder: NSCoder!) {
+        fatalError("NSCoding not supported")
+    }
+    
+    
+    override init(frame: CGRect)
     {
         super.init(frame: frame)
         

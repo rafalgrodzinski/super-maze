@@ -22,6 +22,13 @@ class GameVC: UIViewController {
     
     internal var rotation: CGPoint = CGPointZero
     
+    
+    required init(coder aDecoder: NSCoder!)
+    {
+        fatalError("NSCoding not supported")
+    }
+    
+    
     init(isDebug: Bool)
     {
         self.gameView = UIView()
@@ -30,16 +37,22 @@ class GameVC: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         class GameView: UIView {
-            override class func layerClass() -> AnyClass!
+            required init(coder aDecoder: NSCoder!)
+            {
+                fatalError("NSCoding not supported")
+            }
+            
+            
+            /*override class func layerClass() -> AnyClass!
             {
                 return CAMetalLayer.self
-            }
+            }*/
         }
 
         if self.isDebug {
             self.gameView = DebugView(frame: self.view.frame)
         } else {
-            self.gameView = GameView(frame: self.view.frame)
+            //self.gameView = GameView(frame: self.view.frame)
         }
         
         self.view.backgroundColor = UIColor.whiteColor()

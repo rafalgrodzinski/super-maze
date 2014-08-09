@@ -13,7 +13,14 @@ import Foundation
 class MazeRenderer2D: UIView {
     let maze: Maze
     let levelSize: CGFloat
+    
+    
+    required init(coder aDecoder: NSCoder!)
+    {
+        fatalError("NSCoding not supported")
+    }
 
+    
     init(frame: CGRect, maze: Maze, levelSize: CGFloat)
     {
         self.maze = maze
@@ -43,12 +50,12 @@ class MazeRenderer2D: UIView {
         CGContextSetRGBStrokeColor(ctx, 0.0, 0.0, 0.0, 1.0)
         
         var indexesCount = 1
-        for var level=0; level<maze.levelMultipliers.count; level++ {
+        for var level: Int = 0; level<maze.levelMultipliers.count; level++ {
             indexesCount *= maze.levelMultipliers[level]
             
             let anglePerNode: CGFloat = 360.0/CGFloat(indexesCount)
             
-            for var index=0; index<indexesCount; index++ {
+            for var index: Int = 0; index<indexesCount; index++ {
                 let node = maze.nodes[MazeNodePosition(level: level, index: index)]!
                 
                 //try to draw wall to the right
@@ -57,7 +64,7 @@ class MazeRenderer2D: UIView {
                     rightIndex = 0
                 }
                 
-                if rightIndex != index && !node.paths[MazeNodePosition(level: level, index: rightIndex)] {
+                if rightIndex != index && node.paths[MazeNodePosition(level: level, index: rightIndex)] == nil {
                         //draw wall to the right
                         
                     let angle: CGFloat = anglePerNode * CGFloat(index+1);
@@ -77,12 +84,12 @@ class MazeRenderer2D: UIView {
                         CGContextStrokePath(ctx)
                 }
 
-                let nextLevelMultiplier = level < Int(maze.levelMultipliers.count)-1 ? maze.levelMultipliers[level+1] : 1
-                for var nextIndex=0; nextIndex<nextLevelMultiplier; nextIndex++ {
+                let nextLevelMultiplier: Int = level < Int(maze.levelMultipliers.count)-1 ? maze.levelMultipliers[level+1] : 1
+                for var nextIndex: Int = 0; nextIndex<nextLevelMultiplier; nextIndex++ {
                     var mazePath: CGMutablePathRef
                     mazePath = CGPathCreateMutable()
                     //draw wall with space if there is connection
-                    if node.paths[MazeNodePosition(level: level+1, index: index*nextLevelMultiplier + nextIndex)] {
+                    if node.paths[MazeNodePosition(level: level+1, index: index*nextLevelMultiplier + nextIndex)] != nil {
                         /*let startAngle: CGFloat = CGFloat(index)*anglePerNode + CGFloat(nextIndex)*(anglePerNode/CGFloat(nextLevelMultiplier))
                         let endAngle: CGFloat = CGFloat(index)*anglePerNode + (CGFloat(nextIndex)+1.0)*(anglePerNode/CGFloat(nextLevelMultiplier))
                         let radius: CGFloat = CGFloat(level+1)*self.levelSize

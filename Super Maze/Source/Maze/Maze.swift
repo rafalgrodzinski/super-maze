@@ -87,7 +87,7 @@ class Maze {
             var scrambledPotentialNodes: Array<MazeNode> = []
             var nodeToScramble: MazeNode
             for nodeToScramble in node.potentialPaths.values {
-                scrambledPotentialNodes += nodeToScramble
+                scrambledPotentialNodes.append(nodeToScramble)
             }
             
             for var i=0; i<scrambledPotentialNodes.count; i++ {
