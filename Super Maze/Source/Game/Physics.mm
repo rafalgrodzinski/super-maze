@@ -8,15 +8,17 @@
 
 #import "Physics.h"
 
-//#import "Maze/Maze-Swift.h"
+#import <Super_Maze-Swift.h>
 #import "Box2d.h"
 
 
 @interface Physics ()
 
+@property (nonatomic, strong) Maze *maze;
+
 @property (nonatomic, assign) b2World *world;
 @property (nonatomic, assign) b2Body *ball;
-@property (nonatomic, assign) b2Body *maze;
+@property (nonatomic, assign) b2Body *mazeBody;
 
 @end
 
@@ -29,6 +31,8 @@
     self = [super init];
     if(self == nil)
         return nil;
+    
+    self.maze = maze_;
     
     [self setupWorld];
     [self setupMaze];
@@ -47,26 +51,56 @@
 
 - (void)setupWorld
 {
-    //self.world = new b2World(b2Vec2(0.0, -900.8));
-    //self.world->SetAllowSleeping(false);
-    
     self.world = new b2World(b2Vec2_zero);
 }
 
 
 - (void)setupMaze
 {
-    /*b2BodyDef mazeDef;
+    b2BodyDef mazeDef;
     mazeDef.type = b2_kinematicBody;
     
-    self.maze = self.world->CreateBody(&mazeDef);
+    self.mazeBody = self.world->CreateBody(&mazeDef);
     
-    b2PolygonShape poly;
-    poly.Set(<#const b2Vec2 *points#>, <#int32 count#>)
-    
-    b2FixtureDef mazeFixture;
-    
-    self.maze->CreateFixture(&mazeFixture);*/
+    for(NSInteger level=0; level<self.maze.levelMultipliers.count; level++) {
+        //outside walls
+        NSArray *outsideWallPolygons = [self.maze ousideWallPolygonsAtLevel:level];
+        
+        for(Polygon *wallPolygon in outsideWallPolygons) {
+            b2Vec2 points[4];
+            points[0] = b2Vec2(wallPolygon.v0.x, wallPolygon.v0.y);
+            points[1] = b2Vec2(wallPolygon.v1.x, wallPolygon.v1.y);
+            points[2] = b2Vec2(wallPolygon.v2.x, wallPolygon.v2.y);
+            points[3] = b2Vec2(wallPolygon.v3.x, wallPolygon.v3.y);
+            
+            b2PolygonShape wallPolygonShape;
+            wallPolygonShape.Set(points, 4);
+            
+            b2FixtureDef wallPolygonFixture;
+            wallPolygonFixture.shape = &wallPolygonShape;
+            
+            self.mazeBody->CreateFixture(&wallPolygonFixture);
+        }
+        
+        //inside walls
+        NSArray *wallPolygons = [self.maze wallPolygonsAtLevel:level];
+        
+        for(Polygon *wallPolygon in wallPolygons) {
+            b2Vec2 points[4];
+            points[0] = b2Vec2(wallPolygon.v0.x, wallPolygon.v0.y);
+            points[1] = b2Vec2(wallPolygon.v1.x, wallPolygon.v1.y);
+            points[2] = b2Vec2(wallPolygon.v2.x, wallPolygon.v2.y);
+            points[3] = b2Vec2(wallPolygon.v3.x, wallPolygon.v3.y);
+            
+            b2PolygonShape wallPolygonShape;
+            wallPolygonShape.Set(points, 4);
+            
+            b2FixtureDef wallPolygonFixture;
+            wallPolygonFixture.shape = &wallPolygonShape;
+            
+            self.mazeBody->CreateFixture(&wallPolygonFixture);
+        }
+    }
 }
 
 
@@ -77,7 +111,6 @@
     b2BodyDef ballDef;
     ballDef.type = b2_dynamicBody;
     ballDef.linearDamping = 1.0;
-    //ballDef.angle = (45.0*180.0)/M_PI;
     self.ball = self.world->CreateBody(&ballDef);
     
     b2CircleShape ballShape;

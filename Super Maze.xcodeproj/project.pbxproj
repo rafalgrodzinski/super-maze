@@ -67,7 +67,7 @@
 
 /* Begin PBXFileReference section */
 		B5184CB4198E74F0009CCF56 /* DebugView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugView.swift; path = Source/Rendering/DebugView.swift; sourceTree = "<group>"; };
-		B5184CB6198E7647009CCF56 /* Super Maze-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Super Maze-Bridging-Header.h"; path = "Source/Super Maze-Bridging-Header.h"; sourceTree = "<group>"; };
+		B5184CB6198E7647009CCF56 /* Super_Maze-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Super_Maze-Bridging-Header.h"; path = "Source/Super_Maze-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5184CB7198E7647009CCF56 /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Physics.h; path = Source/Game/Physics.h; sourceTree = "<group>"; };
 		B5184CB8198E7647009CCF56 /* Physics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Physics.mm; path = Source/Game/Physics.mm; sourceTree = "<group>"; };
 		B5184CBC198E76E0009CCF56 /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
@@ -375,7 +375,7 @@
 		B5452DC31961F1FA002A1C36 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				B5184CB6198E7647009CCF56 /* Super Maze-Bridging-Header.h */,
+				B5184CB6198E7647009CCF56 /* Super_Maze-Bridging-Header.h */,
 				B5452DC61961F1FA002A1C36 /* AppDelegate.swift */,
 				B5E28DD4198558A900DA7164 /* Utils.swift */,
 				BAE8FE6B1962CA5300D28603 /* Maze */,
@@ -593,6 +593,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -611,8 +612,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "Super Maze";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Super Maze/Source/Super Maze-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Super Maze/Source/Super_Maze-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Super\\ Maze/Frameworks/**";
@@ -638,6 +640,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -649,8 +652,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "Super Maze";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Super Maze/Source/Super Maze-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Super Maze/Source/Super_Maze-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Super\\ Maze/Frameworks/**";
 				VALIDATE_PRODUCT = YES;

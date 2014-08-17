@@ -9,8 +9,24 @@
 import CoreGraphics
 
 
-class Utils {
-    class func pointAtPolygon(angle: CGFloat, subdivision: Int, radius: CGFloat) -> CGPoint
+@objc public class Polygon {
+    let v0: CGPoint
+    let v1: CGPoint
+    let v2: CGPoint
+    let v3: CGPoint
+    
+    public init(v0: CGPoint, v1: CGPoint, v2: CGPoint, v3: CGPoint)
+    {
+        self.v0 = v0
+        self.v1 = v1
+        self.v2 = v2
+        self.v3 = v3
+    }
+}
+
+
+public class Utils {
+    public class func pointAtPolygon(angle: CGFloat, subdivision: Int, radius: CGFloat) -> CGPoint
     {
         let anglePerPoly: CGFloat = 360.0/CGFloat(subdivision)
         let firstAngle: CGFloat = CGFloat(Int(angle/anglePerPoly)) * anglePerPoly
@@ -28,7 +44,7 @@ class Utils {
     }
     
     
-    class func verticesFromAngle(fromAngle startAngle: CGFloat, toAngle endAngle: CGFloat, subdivision: Int, radius: CGFloat) -> Array<CGPoint>
+    public class func vertices(fromAngle startAngle: CGFloat, toAngle endAngle: CGFloat, subdivision: Int, radius: CGFloat) -> Array<CGPoint>
     {
         var vertices = [CGPoint]()
         

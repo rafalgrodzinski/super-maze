@@ -9,11 +9,11 @@
 import Foundation
 
 
-struct MazeNodePosition : Hashable, Equatable {
-    var level: Int
-    var index: Int
+public struct MazeNodePosition : Hashable, Equatable {
+    public var level: Int
+    public var index: Int
     
-    var hashValue: Int {
+    public var hashValue: Int {
         get {
             return level * 0xffff + index
         }
@@ -21,28 +21,28 @@ struct MazeNodePosition : Hashable, Equatable {
 }
 
 
-func ==(left: MazeNodePosition, right: MazeNodePosition) -> Bool
+public func ==(left: MazeNodePosition, right: MazeNodePosition) -> Bool
 {
     return left.level == right.level && left.index == right.index
 }
 
 
-class MazeNode {
+@objc public class MazeNode {
     
-    let position: MazeNodePosition
+    public let position: MazeNodePosition
 
-    var potentialPaths: Dictionary<MazeNodePosition, MazeNode> = [:]
-    var paths: Dictionary<MazeNodePosition, MazeNode> = [:]
-    var visited: Bool = false
+    public var potentialPaths: Dictionary<MazeNodePosition, MazeNode> = [:]
+    public var paths: Dictionary<MazeNodePosition, MazeNode> = [:]
+    public var visited: Bool = false
 
 
-    init(position: MazeNodePosition)
+    public init(position: MazeNodePosition)
     {
         self.position = position
     }
     
     
-    func connectPotentially(node: MazeNode)
+    public func connectPotentially(node: MazeNode)
     {
         if node.position != self.position && self.potentialPaths[node.position] == nil {
             self.potentialPaths[node.position] = node
@@ -51,7 +51,7 @@ class MazeNode {
     }
     
     
-    func tryConnecting(node: MazeNode) -> Bool
+    public func tryConnecting(node: MazeNode) -> Bool
     {
         if node.position != self.position && self.paths[node.position] == nil && !node.visited {
             self.paths[node.position] = node
