@@ -26,7 +26,7 @@ public enum MazeGenerationAlgorithm {
     public let levelMultipliers: [Int]
     public let levelSize: CGFloat
     public let wallSize: CGFloat
-
+    
     
     public init(thetaWithLevelMultipliers levelMultipliers: [Int], levelSize: CGFloat, wallSize: CGFloat)
     {
@@ -88,6 +88,17 @@ public enum MazeGenerationAlgorithm {
     
     public func generateMaze(fromNode node: MazeNode, usingAlgorithm algorithm: MazeGenerationAlgorithm)
     {
+        self.generateMazeRecursion(fromNode: node, usingAlgorithm: algorithm)
+        
+        //add exit
+        let indexesCount = self.indexesCountAtLevel(self.levelMultipliers.count-1)
+        let node = self.mazeNode(atLevel: self.levelMultipliers.count-1, atIndex: Int(arc4random())%indexesCount)
+        node?.hasExit = true
+    }
+
+    
+    internal func generateMazeRecursion(fromNode node: MazeNode, usingAlgorithm algorithm: MazeGenerationAlgorithm)
+    {
         if algorithm == .RecursiveBacktracker {
             var scrambledPotentialNodes: Array<MazeNode> = []
             var nodeToScramble: MazeNode
@@ -106,7 +117,7 @@ public enum MazeGenerationAlgorithm {
             var potentialNode: MazeNode
             for potentialNode in scrambledPotentialNodes {
                 if node.tryConnecting(potentialNode) {
-                    generateMaze(fromNode: potentialNode, usingAlgorithm: algorithm)
+                    generateMazeRecursion(fromNode: potentialNode, usingAlgorithm: algorithm)
                 }
             }
         }
@@ -150,7 +161,7 @@ public enum MazeGenerationAlgorithm {
                 }
                 
                 //wall is full
-                if isOutermost || !isConnected {
+                if !node.hasExit && (isOutermost || !isConnected) {
                     let startAngle = CGFloat(nextIndex) * (anglePerNode / CGFloat(nextLevelMultiplier))
                     let endAngle = (CGFloat(nextIndex) + 1.0) * (anglePerNode / CGFloat(nextLevelMultiplier))
                     

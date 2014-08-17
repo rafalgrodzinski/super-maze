@@ -34,6 +34,7 @@ public func ==(left: MazeNodePosition, right: MazeNodePosition) -> Bool
     public var potentialPaths: Dictionary<MazeNodePosition, MazeNode> = [:]
     public var paths: Dictionary<MazeNodePosition, MazeNode> = [:]
     public var visited: Bool = false
+    public var hasExit: Bool = false
 
 
     public init(position: MazeNodePosition)

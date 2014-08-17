@@ -76,14 +76,13 @@ class DebugView: UIView {
         }
         
         //Draw ball
-        CGContextSetRGBStrokeColor(ctx, 0.0, 0.0, 0.0, 1.0)
-        CGContextSetLineWidth(ctx, 2.0)
+        CGContextSetRGBFillColor(ctx, 1.0, 0.0, 0.0, 1.0)
         
         let ballRect = CGRectMake(self.ballPosition.x - self.ballDiameter*0.5,
                                   self.ballPosition.y - self.ballDiameter*0.5,
                                   self.ballDiameter,
                                   self.ballDiameter)
-        CGContextStrokeEllipseInRect(ctx, ballRect)
+        CGContextFillEllipseInRect(ctx, ballRect)
         
         //restore current CTM
         CGContextRestoreGState(ctx);
@@ -102,8 +101,9 @@ class DebugView: UIView {
         CGContextScaleCTM(ctx, 1.0, -1.0)
         CGContextTranslateCTM(ctx, self.frame.size.width*0.5, self.frame.size.height*0.5)
         
-        CGContextSetLineWidth(ctx, 2.0)
-        CGContextSetRGBStrokeColor(ctx, 0.0, 0.0, 0.0, 1.0)
+        CGContextSetLineWidth(ctx, 1.0)
+        CGContextSetRGBFillColor(ctx, 0.1, 0.1, 0.1, 1.0)
+        CGContextSetRGBStrokeColor(ctx, 0.1, 0.1, 0.1, 1.0)
         
         //outside walls
         for var level=0; level<maze.levelMultipliers.count; level++ {
@@ -118,8 +118,9 @@ class DebugView: UIView {
                 CGPathAddLineToPoint(path, nil, poly.v3.x, poly.v3.y)
                 CGPathAddLineToPoint(path, nil, poly.v0.x, poly.v0.y)
                 CGContextAddPath(ctx, path)
-                //CGContextStrokePath(ctx)
                 CGContextFillPath(ctx)
+                CGContextAddPath(ctx, path)
+                CGContextStrokePath(ctx)
             }
         }
         
@@ -136,8 +137,9 @@ class DebugView: UIView {
                 CGPathAddLineToPoint(path, nil, poly.v3.x, poly.v3.y)
                 CGPathAddLineToPoint(path, nil, poly.v0.x, poly.v0.y)
                 CGContextAddPath(ctx, path)
-                //CGContextStrokePath(ctx)
                 CGContextFillPath(ctx)
+                CGContextAddPath(ctx, path)
+                CGContextStrokePath(ctx)
             }
         }
         

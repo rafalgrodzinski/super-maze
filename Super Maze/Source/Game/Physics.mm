@@ -106,11 +106,11 @@
 
 - (void)setupBall
 {
-    _ballDiameter = 10.0;
+    _ballDiameter = 15.0;
 
     b2BodyDef ballDef;
     ballDef.type = b2_dynamicBody;
-    ballDef.linearDamping = 0.5;
+    ballDef.linearDamping = 0.4;
     self.ball = self.world->CreateBody(&ballDef);
     
     b2CircleShape ballShape;
@@ -119,6 +119,8 @@
     
     b2FixtureDef ballFixture;
     ballFixture.shape = &ballShape;
+    ballFixture.density = 0.1;
+    ballFixture.restitution = 0.6;
     
     self.ball->CreateFixture(&ballFixture);
 }
@@ -142,7 +144,7 @@
 #pragma mark - Update
 - (void)updateWithInterval:(CGFloat)interval_ rotation:(CGPoint)rotation_
 {
-    self.ball->ApplyForceToCenter(b2Vec2(rotation_.x*64.0, rotation_.y*64.0), true);
+    self.ball->ApplyForceToCenter(b2Vec2(rotation_.x*256.0, rotation_.y*256.0), true);
     self.world->Step(interval_, 8, 3);
 }
 
