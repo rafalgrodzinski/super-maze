@@ -168,7 +168,32 @@ public enum MazeGenerationAlgorithm {
                     }
                 //wall is empty
                 } else {
+                    let angle = (CGFloat(nextIndex)+0.5) * (anglePerNode / CGFloat(nextLevelMultiplier))
                     
+                    let startAngle = CGFloat(nextIndex) * (anglePerNode / CGFloat(nextLevelMultiplier))
+                    let endAngle = CGFloat(nextIndex + 1) * (anglePerNode / CGFloat(nextLevelMultiplier))
+                    
+                    let innerRadius = CGFloat(level) * (self.levelSize + self.wallSize) + self.levelSize
+                    let outerRadius = CGFloat(level) * (self.levelSize + self.wallSize) + self.wallSize + self.levelSize
+                    
+                    let innerAngleDelta: CGFloat = atan((self.levelSize*0.4)/innerRadius) * 180.0/CGFloat(M_PI)
+                    let outerAngleDelta: CGFloat = atan((self.levelSize*0.4)/outerRadius) * 180.0/CGFloat(M_PI)
+                    
+                    let innerLeftPoints = Utils.vertices(fromAngle: startAngle, toAngle: angle-innerAngleDelta, subdivision: self.subdivisionAtLevel(level), radius: innerRadius)
+                    let outerLeftPoints = Utils.vertices(fromAngle: startAngle, toAngle: angle-outerAngleDelta, subdivision: self.subdivisionAtLevel(level), radius: outerRadius)
+                    
+                    for var i=0; i<innerLeftPoints.count-1; i++ {
+                        let poly = Polygon(v0: innerLeftPoints[i], v1: outerLeftPoints[i], v2: outerLeftPoints[i+1], v3: innerLeftPoints[i+1])
+                        polygons.append(poly)
+                    }
+                    
+                    let innerRightPoints = Utils.vertices(fromAngle: angle+innerAngleDelta, toAngle: endAngle, subdivision: self.subdivisionAtLevel(level), radius: innerRadius)
+                    let outerRightPoints = Utils.vertices(fromAngle: angle+outerAngleDelta, toAngle: endAngle, subdivision: self.subdivisionAtLevel(level), radius: outerRadius)
+                    
+                    for var i=0; i<innerRightPoints.count-1; i++ {
+                        let poly = Polygon(v0: innerRightPoints[i], v1: outerRightPoints[i], v2: outerRightPoints[i+1], v3: innerRightPoints[i+1])
+                        polygons.append(poly)
+                    }
                 }
             }
         }
@@ -220,8 +245,13 @@ public enum MazeGenerationAlgorithm {
             let outerPoints = Utils.vertices(fromAngle: angle-outerAngleDelta, toAngle: angle+outerAngleDelta, subdivision: self.subdivisionAtLevel(level), radius: outerRadius)
             
             for var i=0; i<innerPoints.count-1; i++ {
-                let poly = Polygon(v0: innerPoints[i], v1: outerPoints[i], v2: outerPoints[i+1], v3: innerPoints[i+1])
-                polygons.append(poly)
+                var poly: Polygon?
+                if i >= outerPoints.count-1 {
+                    poly = Polygon(v0: innerPoints[i], v1: outerPoints[i], v2: outerPoints[i], v3: innerPoints[i+1])
+                } else {
+                    poly = Polygon(v0: innerPoints[i], v1: outerPoints[i], v2: outerPoints[i+1], v3: innerPoints[i+1])
+                }
+                polygons.append(poly!)
             }
         }
         
@@ -231,7 +261,7 @@ public enum MazeGenerationAlgorithm {
     
     public func subdivisionAtLevel(level: Int) -> Int
     {
-        return 10
+        return 20
     }
         
         

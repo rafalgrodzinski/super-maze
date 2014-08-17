@@ -62,7 +62,7 @@ class GameVC: UIViewController {
     
     override func viewDidLoad()
     {
-        self.maze = Maze(thetaWithLevelMultipliers: [1, 4, 2, 1, 2], levelSize: 30.0, wallSize:20.0)
+        self.maze = Maze(thetaWithLevelMultipliers: [1, 4, 2, 1, 2, 2], levelSize: 30.0, wallSize:20.0)
         self.maze?.generateMaze(fromNode: self.maze!.nodes[MazeNodePosition(level: 0, index: 0)]!, usingAlgorithm: .RecursiveBacktracker)
         self.physics = Physics(maze: self.maze)
         
@@ -74,7 +74,7 @@ class GameVC: UIViewController {
     override func viewWillAppear(animated: Bool)
     {
         self.displayLink = CADisplayLink(target: self, selector: Selector("update"))
-        self.displayLink!.frameInterval = 1
+        self.displayLink!.frameInterval = 2
         self.displayLink?.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
         
         self.motionManager?.startDeviceMotionUpdates()

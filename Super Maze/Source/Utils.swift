@@ -26,8 +26,12 @@ import CoreGraphics
 
 
 public class Utils {
-    public class func pointAtPolygon(angle: CGFloat, subdivision: Int, radius: CGFloat) -> CGPoint
+    public class func pointAtPolygon(var angle: CGFloat, subdivision: Int, radius: CGFloat) -> CGPoint
     {
+        if angle < 0.0 {
+            angle += 360.0
+        }
+        
         let anglePerPoly: CGFloat = 360.0/CGFloat(subdivision)
         let firstAngle: CGFloat = CGFloat(Int(angle/anglePerPoly)) * anglePerPoly
         
