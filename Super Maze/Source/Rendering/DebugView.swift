@@ -13,6 +13,7 @@ class DebugView: UIView {
     var ballPosition: CGPoint = CGPointZero
     var ballDiameter: CGFloat = 0.0
     var ballAngle: CGFloat = 0.0
+    var shouldUpdate: Bool = true
     
     var maze: Maze? {
         willSet(newMaze) {
@@ -38,7 +39,11 @@ class DebugView: UIView {
     
     func update()
     {
-        self.setNeedsDisplay()
+        if self.shouldUpdate {
+            self.setNeedsDisplay()
+        }
+        
+        self.shouldUpdate = !self.shouldUpdate
     }
 
     

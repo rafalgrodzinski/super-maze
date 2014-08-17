@@ -110,7 +110,7 @@
 
     b2BodyDef ballDef;
     ballDef.type = b2_dynamicBody;
-    ballDef.linearDamping = 1.0;
+    ballDef.linearDamping = 0.5;
     self.ball = self.world->CreateBody(&ballDef);
     
     b2CircleShape ballShape;
@@ -142,7 +142,7 @@
 #pragma mark - Update
 - (void)updateWithInterval:(CGFloat)interval_ rotation:(CGPoint)rotation_
 {
-    self.ball->ApplyForceToCenter(b2Vec2(rotation_.x*4.0, rotation_.y*4.0), true);
+    self.ball->ApplyForceToCenter(b2Vec2(rotation_.x*64.0, rotation_.y*64.0), true);
     self.world->Step(interval_, 8, 3);
 }
 

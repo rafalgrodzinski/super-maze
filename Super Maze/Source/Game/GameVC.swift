@@ -74,7 +74,7 @@ class GameVC: UIViewController {
     override func viewWillAppear(animated: Bool)
     {
         self.displayLink = CADisplayLink(target: self, selector: Selector("update"))
-        self.displayLink!.frameInterval = 2
+        self.displayLink!.frameInterval = 1
         self.displayLink?.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
         
         self.motionManager?.startDeviceMotionUpdates()
