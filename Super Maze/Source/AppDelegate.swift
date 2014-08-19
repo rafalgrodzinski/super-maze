@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.makeKeyAndVisible()
         
-        self.window!.rootViewController = GameVC(isDebug: true);
+        self.window!.rootViewController = GameVC(isDebug: false);
         
         return true
     }

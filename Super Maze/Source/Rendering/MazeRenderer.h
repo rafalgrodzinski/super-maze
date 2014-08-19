@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 UnalignedByte. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 
 @class Maze;
@@ -15,7 +15,7 @@
 @interface MazeRenderer : NSObject
 
 //Initialization
-- (instancetype)initWithMaze:(Maze *)maze_;
+- (instancetype)initWithMaze:(Maze *)maze_ rendererView:(UIView *)rendererView_;
 
 //Control
 - (void)redraw;

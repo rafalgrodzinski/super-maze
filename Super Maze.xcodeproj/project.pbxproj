@@ -57,6 +57,7 @@
 		B5184D4F198E76E0009CCF56 /* b2WeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5184D1B198E76E0009CCF56 /* b2WeldJoint.cpp */; };
 		B5184D50198E76E0009CCF56 /* b2WheelJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5184D1D198E76E0009CCF56 /* b2WheelJoint.cpp */; };
 		B5184D51198E76E0009CCF56 /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5184D20198E76E0009CCF56 /* b2Rope.cpp */; };
+		B52545D919A3FFF00082AA0E /* default.metal in Sources */ = {isa = PBXBuildFile; fileRef = B52545D819A3FFF00082AA0E /* default.metal */; };
 		B5452DC71961F1FA002A1C36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5452DC61961F1FA002A1C36 /* AppDelegate.swift */; };
 		B5452DC91961F1FA002A1C36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5452DC81961F1FA002A1C36 /* Images.xcassets */; };
 		B5C16ED8198ADB4E00EC65E6 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C16ED7198ADB4E00EC65E6 /* GameVC.swift */; };
@@ -166,6 +167,7 @@
 		B5184D1E198E76E0009CCF56 /* b2WheelJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2WheelJoint.h; sourceTree = "<group>"; };
 		B5184D20198E76E0009CCF56 /* b2Rope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2Rope.cpp; sourceTree = "<group>"; };
 		B5184D21198E76E0009CCF56 /* b2Rope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2Rope.h; sourceTree = "<group>"; };
+		B52545D819A3FFF00082AA0E /* default.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = default.metal; path = Source/Rendering/default.metal; sourceTree = "<group>"; };
 		B5452DC11961F1FA002A1C36 /* Super Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Super Maze.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5452DC61961F1FA002A1C36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Source/AppDelegate.swift; sourceTree = "<group>"; };
 		B5452DC81961F1FA002A1C36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Super Maze/Resources/Images.xcassets"; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				B5184CB4198E74F0009CCF56 /* DebugView.swift */,
 				B5FEE28319A3EA87005CE009 /* MazeRenderer.h */,
 				B5FEE28419A3EA87005CE009 /* MazeRenderer.m */,
+				B52545D819A3FFF00082AA0E /* default.metal */,
 			);
 			name = Rendering;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				B5184D4B198E76E0009CCF56 /* b2PrismaticJoint.cpp in Sources */,
 				B5184D44198E76E0009CCF56 /* b2PolygonContact.cpp in Sources */,
 				B5184D4F198E76E0009CCF56 /* b2WeldJoint.cpp in Sources */,
+				B52545D919A3FFF00082AA0E /* default.metal in Sources */,
 				B5184D25198E76E0009CCF56 /* b2CollideCircle.cpp in Sources */,
 				BAE8FE6D1962CA7900D28603 /* MazeNode.swift in Sources */,
 				B5184D26198E76E0009CCF56 /* b2CollideEdge.cpp in Sources */,

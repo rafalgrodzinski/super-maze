@@ -81,7 +81,8 @@ class GameVC: UIViewController {
             self.view.addSubview(self.debugView!)
         } else {
             self.rendererView = MazeRendererView(frame: self.view.frame)
-            self.renderer = MazeRenderer(maze: self.maze!)
+            self.view.addSubview(self.rendererView!)
+            self.renderer = MazeRenderer(maze: self.maze!, rendererView: self.rendererView!)
         }
         
         //Physics
