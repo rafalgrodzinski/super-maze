@@ -9,21 +9,51 @@
 import UIKit
 import QuartzCore
 import CoreMotion
+import Metal
+
+
+class MazeRendererView: UIView {
+    required init(coder aDecoder: NSCoder)
+    {
+        fatalError("NSCoding not supported")
+    }
+    
+    
+    override init(frame: CGRect)
+    {
+        super.init(frame: frame)
+    }
+    
+    
+    override class func layerClass() -> AnyClass
+    {
+        return CAMetalLayer.self
+    }
+}
 
 
 class GameVC: UIViewController {
-    internal let gameView: UIView
+    //State
     internal let isDebug: Bool
     
-    internal var displayLink: CADisplayLink?
+    //Model
     internal var maze: Maze?
-    internal var physics: Physics?
-    internal var motionManager: CMMotionManager?
     
+    //Graphics
+    internal var rendererView: UIView?
+    internal var debugView: DebugView?
+    internal var renderer: MazeRenderer?
+    internal var displayLink: CADisplayLink?
+
+    //Physics
+    internal var physics: Physics?
+    
+    //Input
+    internal var motionManager: CMMotionManager?
     internal var rotation: CGPoint = CGPointZero
     
     
-    required init(coder aDecoder: NSCoder!)
+    required init(coder aDecoder: NSCoder)
     {
         fatalError("NSCoding not supported")
     }
@@ -31,59 +61,52 @@ class GameVC: UIViewController {
     
     init(isDebug: Bool)
     {
-        self.gameView = UIView()
         self.isDebug = isDebug
-        
+
         super.init(nibName: nil, bundle: nil)
         
-        class GameView: UIView {
-            required init(coder aDecoder: NSCoder!)
-            {
-                fatalError("NSCoding not supported")
-            }
-            
-            
-            /*override class func layerClass() -> AnyClass!
-            {
-                return CAMetalLayer.self
-            }*/
-        }
-
-        if self.isDebug {
-            self.gameView = DebugView(frame: self.view.frame)
-        } else {
-            //self.gameView = GameView(frame: self.view.frame)
-        }
-        
         self.view.backgroundColor = UIColor.whiteColor()
-        self.view.addSubview(self.gameView)
     }
     
     
     override func viewDidLoad()
     {
+        //Data Model
         self.maze = Maze(thetaWithLevelMultipliers: [1, 4, 2, 1, 2, 2, 1, 1], levelSize: 30.0, wallSize:20.0)
         self.maze?.generateMaze(fromNode: self.maze!.nodes[MazeNodePosition(level: 0, index: 0)]!, usingAlgorithm: .RecursiveBacktracker)
-        self.physics = Physics(maze: self.maze)
         
+        //Graphics
+        if self.isDebug {
+            self.debugView = DebugView(frame: self.view.frame, maze: self.maze!)
+            self.view.addSubview(self.debugView!)
+        } else {
+            self.rendererView = MazeRendererView(frame: self.view.frame)
+            self.renderer = MazeRenderer(maze: self.maze!)
+        }
+        
+        //Physics
+        self.physics = Physics(maze: self.maze)
+
+        //Input
         self.motionManager = CMMotionManager()
-        self.motionManager!.deviceMotionUpdateInterval = NSTimeInterval(1.0/60.0)
+        self.motionManager?.deviceMotionUpdateInterval = NSTimeInterval(1.0/60.0)
+        self.motionManager?.startDeviceMotionUpdates()
     }
     
     
     override func viewWillAppear(animated: Bool)
     {
         self.displayLink = CADisplayLink(target: self, selector: Selector("update"))
-        self.displayLink!.frameInterval = 1
+        self.displayLink?.frameInterval = 1
         self.displayLink?.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
         
-        self.motionManager?.startDeviceMotionUpdates()
+
     }
     
     
     func update()
     {
-        //get rotation
+        //Update Input
         if let attitude: CMAttitude = self.motionManager?.deviceMotion?.attitude? {
             self.rotation = CGPointMake(CGFloat(attitude.roll*180.0/M_PI), CGFloat(-attitude.pitch*180.0/M_PI))
             if self.rotation.x < -90.0 {
@@ -99,14 +122,18 @@ class GameVC: UIViewController {
             }
         }
         
+        //Update Physics
         self.physics?.updateWithInterval(CGFloat(self.displayLink!.duration), rotation: self.rotation)
         
-        (self.gameView as DebugView).maze = self.maze
-        
-        (self.gameView as DebugView).ballPosition = self.physics!.ballPosition
-        (self.gameView as DebugView).ballDiameter = self.physics!.ballDiameter
-        (self.gameView as DebugView).ballAngle = self.physics!.ballAngle
-        
-        (self.gameView as DebugView).update()
+        //Update Graphics
+        if self.isDebug {
+            self.debugView?.ballPosition = self.physics!.ballPosition
+            self.debugView?.ballDiameter = self.physics!.ballDiameter
+            self.debugView?.ballAngle = self.physics!.ballAngle
+            
+            self.debugView?.redraw()
+        } else {
+            self.renderer?.redraw()
+        }
     }
 }

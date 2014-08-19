@@ -10,34 +10,30 @@ import UIKit
 
 
 class DebugView: UIView {
+    //Graphics
+    var shouldUpdate: Bool = true
+    var mazeImage: CGImageRef?
+    //State
     var ballPosition: CGPoint = CGPointZero
     var ballDiameter: CGFloat = 0.0
     var ballAngle: CGFloat = 0.0
-    var shouldUpdate: Bool = true
     
-    var maze: Maze? {
-        willSet(newMaze) {
-            self.mazeNeedsUpdate = self.maze !== newMaze
-        }
-    }
-    var mazeImage: CGImageRef?
-    var mazeNeedsUpdate: Bool = false
-    
-    
-    required init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
     
     
-    override init(frame: CGRect)
+    init(frame: CGRect, maze: Maze)
     {
         super.init(frame: frame)
+        
+        self.mazeImage = self.mazeImageFrom(maze)
         
         self.backgroundColor = UIColor.clearColor()
     }
     
     
-    func update()
+    func redraw()
     {
         if self.shouldUpdate {
             self.setNeedsDisplay()
@@ -63,17 +59,10 @@ class DebugView: UIView {
         CGContextTranslateCTM(ctx, self.frame.size.width*0.5, self.frame.size.height*0.5)
         
         //draw maze
-        if let maze = self.maze {
-            if self.mazeNeedsUpdate {
-                self.mazeImage = self.mazeImageFrom(maze)
-                self.mazeNeedsUpdate = false
-            }
-            
-            let width = CGFloat(CGImageGetWidth(self.mazeImage))
-            let height = CGFloat(CGImageGetHeight(self.mazeImage))
-            
-            CGContextDrawImage(ctx, CGRectMake(-width*0.5, -height*0.5, width, height), self.mazeImage)
-        }
+        let width = CGFloat(CGImageGetWidth(self.mazeImage))
+        let height = CGFloat(CGImageGetHeight(self.mazeImage))
+        
+        CGContextDrawImage(ctx, CGRectMake(-width*0.5, -height*0.5, width, height), self.mazeImage)
         
         //Draw ball
         CGContextSetRGBFillColor(ctx, 1.0, 0.0, 0.0, 1.0)
