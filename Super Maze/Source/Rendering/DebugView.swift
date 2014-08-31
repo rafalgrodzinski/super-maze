@@ -106,8 +106,8 @@ class DebugView: UIView {
                 CGPathAddLineToPoint(path, nil, poly.v2.x, poly.v2.y)
                 CGPathAddLineToPoint(path, nil, poly.v3.x, poly.v3.y)
                 CGPathAddLineToPoint(path, nil, poly.v0.x, poly.v0.y)
-                CGContextAddPath(ctx, path)
-                CGContextFillPath(ctx)
+                //CGContextAddPath(ctx, path)
+                //CGContextFillPath(ctx)
                 CGContextAddPath(ctx, path)
                 CGContextStrokePath(ctx)
             }
@@ -125,8 +125,8 @@ class DebugView: UIView {
                 CGPathAddLineToPoint(path, nil, poly.v2.x, poly.v2.y)
                 CGPathAddLineToPoint(path, nil, poly.v3.x, poly.v3.y)
                 CGPathAddLineToPoint(path, nil, poly.v0.x, poly.v0.y)
-                CGContextAddPath(ctx, path)
-                CGContextFillPath(ctx)
+                //CGContextAddPath(ctx, path)
+                //CGContextFillPath(ctx)
                 CGContextAddPath(ctx, path)
                 CGContextStrokePath(ctx)
             }

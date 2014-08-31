@@ -60,9 +60,11 @@
 		B52545D919A3FFF00082AA0E /* default.metal in Sources */ = {isa = PBXBuildFile; fileRef = B52545D819A3FFF00082AA0E /* default.metal */; };
 		B5452DC71961F1FA002A1C36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5452DC61961F1FA002A1C36 /* AppDelegate.swift */; };
 		B5452DC91961F1FA002A1C36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5452DC81961F1FA002A1C36 /* Images.xcassets */; };
+		B547D04F19B381E000F2ACBA /* Model.mm in Sources */ = {isa = PBXBuildFile; fileRef = B547D04E19B381E000F2ACBA /* Model.mm */; };
+		B59456F019AA0F9F00772F89 /* METLTransforms.mm in Sources */ = {isa = PBXBuildFile; fileRef = B59456EF19AA0F9F00772F89 /* METLTransforms.mm */; };
 		B5C16ED8198ADB4E00EC65E6 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C16ED7198ADB4E00EC65E6 /* GameVC.swift */; };
 		B5E28DD5198558A900DA7164 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E28DD4198558A900DA7164 /* Utils.swift */; };
-		B5FEE28519A3EA87005CE009 /* MazeRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FEE28419A3EA87005CE009 /* MazeRenderer.m */; };
+		B5FEE28519A3EA87005CE009 /* MazeRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5FEE28419A3EA87005CE009 /* MazeRenderer.mm */; };
 		BAE8FE6D1962CA7900D28603 /* MazeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE8FE6C1962CA7900D28603 /* MazeNode.swift */; };
 		BAE8FE6F1962CCCA00D28603 /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE8FE6E1962CCCA00D28603 /* Maze.swift */; };
 /* End PBXBuildFile section */
@@ -171,10 +173,15 @@
 		B5452DC11961F1FA002A1C36 /* Super Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Super Maze.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5452DC61961F1FA002A1C36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Source/AppDelegate.swift; sourceTree = "<group>"; };
 		B5452DC81961F1FA002A1C36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Super Maze/Resources/Images.xcassets"; sourceTree = "<group>"; };
+		B547D04D19B381E000F2ACBA /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Model.h; path = Source/Rendering/Model.h; sourceTree = "<group>"; };
+		B547D04E19B381E000F2ACBA /* Model.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Model.mm; path = Source/Rendering/Model.mm; sourceTree = "<group>"; };
+		B547D05019B3B35C00F2ACBA /* Uniforms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Uniforms.h; path = Source/Rendering/Uniforms.h; sourceTree = "<group>"; };
+		B59456EE19AA0F9F00772F89 /* METLTransforms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = METLTransforms.h; sourceTree = "<group>"; };
+		B59456EF19AA0F9F00772F89 /* METLTransforms.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = METLTransforms.mm; sourceTree = "<group>"; };
 		B5C16ED7198ADB4E00EC65E6 /* GameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameVC.swift; path = Source/Game/GameVC.swift; sourceTree = "<group>"; };
 		B5E28DD4198558A900DA7164 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Source/Utils.swift; sourceTree = "<group>"; };
 		B5FEE28319A3EA87005CE009 /* MazeRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MazeRenderer.h; path = Source/Rendering/MazeRenderer.h; sourceTree = "<group>"; };
-		B5FEE28419A3EA87005CE009 /* MazeRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MazeRenderer.m; path = Source/Rendering/MazeRenderer.m; sourceTree = "<group>"; };
+		B5FEE28419A3EA87005CE009 /* MazeRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MazeRenderer.mm; path = Source/Rendering/MazeRenderer.mm; sourceTree = "<group>"; };
 		BAD4CCF01962B50E00A364ED /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Super Maze/Supporting Files/Info.plist"; sourceTree = "<group>"; };
 		BAE8FE6C1962CA7900D28603 /* MazeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MazeNode.swift; path = Source/Maze/MazeNode.swift; sourceTree = "<group>"; };
 		BAE8FE6E1962CCCA00D28603 /* Maze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Maze.swift; path = Source/Maze/Maze.swift; sourceTree = "<group>"; };
@@ -405,11 +412,25 @@
 			isa = PBXGroup;
 			children = (
 				B5184CB4198E74F0009CCF56 /* DebugView.swift */,
+				B547D05019B3B35C00F2ACBA /* Uniforms.h */,
 				B5FEE28319A3EA87005CE009 /* MazeRenderer.h */,
-				B5FEE28419A3EA87005CE009 /* MazeRenderer.m */,
+				B5FEE28419A3EA87005CE009 /* MazeRenderer.mm */,
+				B547D04D19B381E000F2ACBA /* Model.h */,
+				B547D04E19B381E000F2ACBA /* Model.mm */,
 				B52545D819A3FFF00082AA0E /* default.metal */,
+				B59456ED19AA0F9F00772F89 /* Math */,
 			);
 			name = Rendering;
+			sourceTree = "<group>";
+		};
+		B59456ED19AA0F9F00772F89 /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				B59456EE19AA0F9F00772F89 /* METLTransforms.h */,
+				B59456EF19AA0F9F00772F89 /* METLTransforms.mm */,
+			);
+			name = Math;
+			path = Source/Rendering/Math;
 			sourceTree = "<group>";
 		};
 		BAD4CCF21962B51200A364ED /* Supporting Files */ = {
@@ -535,6 +556,7 @@
 				B5184D4D198E76E0009CCF56 /* b2RevoluteJoint.cpp in Sources */,
 				B5184D41198E76E0009CCF56 /* b2EdgeAndCircleContact.cpp in Sources */,
 				B5184D4B198E76E0009CCF56 /* b2PrismaticJoint.cpp in Sources */,
+				B547D04F19B381E000F2ACBA /* Model.mm in Sources */,
 				B5184D44198E76E0009CCF56 /* b2PolygonContact.cpp in Sources */,
 				B5184D4F198E76E0009CCF56 /* b2WeldJoint.cpp in Sources */,
 				B52545D919A3FFF00082AA0E /* default.metal in Sources */,
@@ -543,12 +565,13 @@
 				B5184D26198E76E0009CCF56 /* b2CollideEdge.cpp in Sources */,
 				B5184D4C198E76E0009CCF56 /* b2PulleyJoint.cpp in Sources */,
 				B5184D43198E76E0009CCF56 /* b2PolygonAndCircleContact.cpp in Sources */,
-				B5FEE28519A3EA87005CE009 /* MazeRenderer.m in Sources */,
+				B5FEE28519A3EA87005CE009 /* MazeRenderer.mm in Sources */,
 				B5184D45198E76E0009CCF56 /* b2DistanceJoint.cpp in Sources */,
 				B5184D51198E76E0009CCF56 /* b2Rope.cpp in Sources */,
 				B5184D47198E76E0009CCF56 /* b2GearJoint.cpp in Sources */,
 				B5184D36198E76E0009CCF56 /* b2Body.cpp in Sources */,
 				B5452DC71961F1FA002A1C36 /* AppDelegate.swift in Sources */,
+				B59456F019AA0F9F00772F89 /* METLTransforms.mm in Sources */,
 				B5184CB5198E74F0009CCF56 /* DebugView.swift in Sources */,
 				B5184D46198E76E0009CCF56 /* b2FrictionJoint.cpp in Sources */,
 				B5184D2C198E76E0009CCF56 /* b2ChainShape.cpp in Sources */,
@@ -601,7 +624,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rafal Grodzinski (26CJHPNYQM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rafal Grodzinski (26CJHPNYQM)";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -623,6 +647,7 @@
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Super Maze";
+				PROVISIONING_PROFILE = "E5FD9E58-9C7C-4697-A56F-93F18B7B8965";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Super Maze/Source/Super_Maze-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -648,7 +673,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rafal Grodzinski (26CJHPNYQM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rafal Grodzinski (26CJHPNYQM)";
 				COPY_PHASE_STRIP = YES;
 				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -663,6 +689,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "Super Maze";
+				PROVISIONING_PROFILE = "E5FD9E58-9C7C-4697-A56F-93F18B7B8965";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Super Maze/Source/Super_Maze-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
