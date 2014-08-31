@@ -14,6 +14,9 @@
 
 @interface MazeRenderer : NSObject
 
+@property (nonatomic, assign) CGPoint ballPosition;
+
+
 //Initialization
 - (instancetype)initWithMaze:(Maze *)maze_ rendererView:(UIView *)rendererView_;
 

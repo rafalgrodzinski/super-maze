@@ -12,5 +12,4 @@
 typedef struct {
     simd::float4x4 projectionMatrix;
     simd::float4x4 viewMatrix;
-    simd::float4x4 modelMatrix;
 } Uniforms;

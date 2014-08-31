@@ -25,13 +25,14 @@ struct VertexOut
 };
 
 
-vertex VertexOut default_vert(device float3 *vertexBuffer [[buffer(0)]],
-                              device float4 *colorBuffer  [[buffer(1)]],
-                              constant Uniforms *uniforms [[buffer(2)]],
-                              uint vid [[vertex_id]])
+vertex VertexOut default_vert(device   float3   *vertexBuffer [[buffer(0)]],
+                              device   float4   *colorBuffer  [[buffer(1)]],
+                              constant float4x4 *modelMatrix  [[buffer(2)]],
+                              constant Uniforms *uniforms     [[buffer(3)]],
+                              uint               vid          [[vertex_id]])
 {
     VertexOut out;
-    out.position = uniforms->projectionMatrix * uniforms->viewMatrix * uniforms->modelMatrix * float4(vertexBuffer[vid], 1.0);
+    out.position = uniforms->projectionMatrix * uniforms->viewMatrix * *modelMatrix * float4(vertexBuffer[vid], 1.0);
     out.color = colorBuffer[vid];
     
     return out;

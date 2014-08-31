@@ -62,6 +62,7 @@
     MTLRenderPipelineDescriptor *pipeDesc = [MTLRenderPipelineDescriptor new];
     pipeDesc.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
     [pipeDesc setDepthAttachmentPixelFormat:MTLPixelFormatDepth32Float];
+    pipeDesc.sampleCount = 1;
     
     id<MTLFunction> vertProg = [self.library newFunctionWithName:@"default_vert"];
     pipeDesc.vertexFunction = vertProg;
@@ -105,19 +106,18 @@
     self.uniformsBuffer = [self.device newBufferWithLength:sizeof(Uniforms) options:0];
     
     CGFloat aspectRatio = rendererView_.frame.size.width/rendererView_.frame.size.height;
-    self.uniforms->projectionMatrix = METL::perspective_fov(65.0, aspectRatio, 0.1, 100.0);
+    self.uniforms->projectionMatrix = METL::perspective_fov(65.0, aspectRatio, 0.1, 1500.0);
     
-    simd::float3 eye = {4.0, 4.0, -4.0};
+    simd::float3 eye = {0.0, 600.0, -600.0};
     simd::float3 center = {0.0, 0.0, 0.0};
     simd::float3 up = {0.0, 1.0, 0.0};
     self.uniforms->viewMatrix = METL::lookAt(eye, center, up);
-    
-    self.uniforms->modelMatrix = METL::translate(0.0, 0.0, 0.0);
     
     [self update];
     
     //Load Assets
     self.mazeModel = [[Model alloc] initMazeModelWithDevice:self.device maze:maze_];
+    self.ballModel = [[Model alloc] initBallModelWithDevice:self.device diameter:10.0];
     
     return self;
 }
@@ -126,6 +126,15 @@
 - (void)dealloc
 {
     free(self.uniforms);
+}
+
+
+#pragma mark - Properties
+- (void)setBallPosition:(CGPoint)ballPosition_
+{
+    _ballPosition = ballPosition_;
+    
+    self.ballModel.modelMatrix = METL::translate(ballPosition_.x, 5.0, ballPosition_.y);
 }
 
 
@@ -146,9 +155,12 @@
     id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:self.passDescriptor];
     [encoder setViewport:self.viewport];
     [encoder setDepthStencilState:self.depthState];
+    [encoder setFrontFacingWinding:MTLWindingClockwise];
+    [encoder setCullMode:MTLCullModeBack];
     
     //Draw models
     [self drawModel:self.mazeModel encoder:encoder];
+    [self drawModel:self.ballModel encoder:encoder];
     
     //Commit and show stuff
     [encoder endEncoding];
@@ -175,9 +187,10 @@
 {
     [encoder_ setRenderPipelineState:self.pipeState];
     
-    [encoder_ setVertexBuffer:model_.vertexBuffer offset:0 atIndex:0];
-    [encoder_ setVertexBuffer:model_.colorBuffer  offset:0 atIndex:1];
-    [encoder_ setVertexBuffer:self.uniformsBuffer offset:0 atIndex:2];
+    [encoder_ setVertexBuffer:model_.vertexBuffer      offset:0 atIndex:0];
+    [encoder_ setVertexBuffer:model_.colorBuffer       offset:0 atIndex:1];
+    [encoder_ setVertexBuffer:model_.modelMatrixBuffer offset:0 atIndex:2];
+    [encoder_ setVertexBuffer:self.uniformsBuffer      offset:0 atIndex:3];
     
     [encoder_ drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:model_.vertexCount];
 }

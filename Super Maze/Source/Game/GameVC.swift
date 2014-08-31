@@ -134,6 +134,7 @@ class GameVC: UIViewController {
             
             self.debugView?.redraw()
         } else {
+            self.renderer?.ballPosition = self.physics!.ballPosition
             self.renderer?.redraw()
         }
     }

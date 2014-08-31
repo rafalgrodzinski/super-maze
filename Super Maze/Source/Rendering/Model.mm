@@ -8,6 +8,9 @@
 
 #import "Model.h"
 #import <simd/simd.h>
+#import "METLTransforms.h"
+
+#import "Super_Maze-Swift.h"
 
 
 @implementation Model
@@ -19,123 +22,63 @@
     if(self == nil)
         return nil;
     
-    self.vertexCount = 36;
+    //setup model matrix
+    self.modelMatrixBuffer = [device_ newBufferWithLength:sizeof(simd::float4x4) options:0];
+    self.modelMatrix = METL::translate(0.0, 0.0, 0.0);
     
-    simd::float3 *verticesBuffer = (simd::float3 *)malloc(sizeof(simd::float3) * 36);
+    //generate vertices
+    NSMutableArray *polygons = [NSMutableArray array];
     
-    //front
-    verticesBuffer[0]  = {-0.5, -0.5, -0.5};
-    verticesBuffer[1]  = {-0.5, +0.5, -0.5};
-    verticesBuffer[2]  = {+0.5, +0.5, -0.5};
+    for(NSInteger level=0; level<maze_.levelMultipliers.count; level++) {
+        //outside wall
+        NSArray *outsideWallolygons = [maze_ ousideWallPolygonsAtLevel:level];
+        [polygons addObjectsFromArray:outsideWallolygons];
+        
+        //inside walls
+        NSArray *wallPolygons = [maze_ wallPolygonsAtLevel:level];
+        [polygons addObjectsFromArray:wallPolygons];
+    }
     
-    verticesBuffer[3]  = {-0.5, -0.5, -0.5};
-    verticesBuffer[4]  = {+0.5, +0.5, -0.5};
-    verticesBuffer[5]  = {+0.5, -0.5, -0.5};
+    self.vertexCount = polygons.count * 5 * 2 * 3; //5 walls, 2 triangles, 3 vertices
     
-    //right
-    verticesBuffer[6]  = {+0.5, -0.5, -0.5};
-    verticesBuffer[7]  = {+0.5, +0.5, -0.5};
-    verticesBuffer[8]  = {+0.5, +0.5, +0.5};
+    simd::float3 *vertexBuffer = (simd::float3 *)malloc(sizeof(simd::float3) * self.vertexCount);
+    simd::float3 *bufferPointer = vertexBuffer;
     
-    verticesBuffer[9]  = {+0.5, -0.5, -0.5};
-    verticesBuffer[10] = {+0.5, +0.5, +0.5};
-    verticesBuffer[11] = {+0.5, -0.5, +0.5};
+    for(Polygon *polygon in polygons) {
+        bufferPointer += [self boxFromPolygon:polygon height:maze_.wallSize atAddress:bufferPointer];
+    }
     
-    //back
-    verticesBuffer[12] = {-0.5, -0.5, +0.5};
-    verticesBuffer[13] = {-0.5, +0.5, +0.5};
-    verticesBuffer[14] = {+0.5, +0.5, +0.5};
+    self.vertexBuffer = [device_ newBufferWithBytes:vertexBuffer length:sizeof(simd::float3) * self.vertexCount options:0];
     
-    verticesBuffer[15] = {-0.5, -0.5, +0.5};
-    verticesBuffer[16] = {+0.5, +0.5, +0.5};
-    verticesBuffer[17] = {+0.5, -0.5, +0.5};
+    free(vertexBuffer);
     
-    //left
-    verticesBuffer[18] = {-0.5, -0.5, -0.5};
-    verticesBuffer[19] = {-0.5, +0.5, -0.5};
-    verticesBuffer[20] = {-0.5, +0.5, +0.5};
+    //dummy colors
+    simd::float4 *colorBuffer = (simd::float4 *)malloc(sizeof(simd::float4) * self.vertexCount);
+    simd::float4 *colorPointer = colorBuffer;
     
-    verticesBuffer[21] = {-0.5, -0.5, -0.5};
-    verticesBuffer[22] = {-0.5, +0.5, +0.5};
-    verticesBuffer[23] = {-0.5, -0.5, +0.5};
+    for(NSInteger i=0; i<self.vertexCount; i+=6) {
+        simd::float4 color;
+        color.x = arc4random()%1000/1000.0;
+        color.y = arc4random()%1000/1000.0;
+        color.z = arc4random()%1000/1000.0;
+        color.w = 1.0;
+
+        colorPointer[0] = color;
+        colorPointer[1] = color;
+        colorPointer[2] = color;
+        
+        colorPointer[3] = color;
+        colorPointer[4] = color;
+        colorPointer[5] = color;
+        
+        colorPointer += 6;
+    }
     
-    //top
-    verticesBuffer[24] = {-0.5, +0.5, -0.5};
-    verticesBuffer[25] = {-0.5, +0.5, +0.5};
-    verticesBuffer[26] = {+0.5, +0.5, -0.5};
+    self.colorBuffer = [device_ newBufferWithBytes:colorBuffer length:sizeof(simd::float4) * self.vertexCount options:0];
     
-    verticesBuffer[27] = {+0.5, +0.5, -0.5};
-    verticesBuffer[28] = {-0.5, +0.5, +0.5};
-    verticesBuffer[29] = {+0.5, +0.5, +0.5};
+    free(colorBuffer);
     
-    //bottom
-    verticesBuffer[30] = {-0.5, -0.5, -0.5};
-    verticesBuffer[31] = {-0.5, -0.5, +0.5};
-    verticesBuffer[32] = {+0.5, -0.5, -0.5};
-    
-    verticesBuffer[33] = {+0.5, -0.5, -0.5};
-    verticesBuffer[34] = {-0.5, -0.5, +0.5};
-    verticesBuffer[35] = {+0.5, -0.5, +0.5};
-    
-    self.vertexBuffer = [device_ newBufferWithBytes:verticesBuffer length:36*sizeof(simd::float3) options:0];
-    
-    simd::float4 *colors = (simd::float4 *)malloc(sizeof(simd::float4) * 36);
-    
-    //front
-    colors[0]  = {1.0, 0.0, 0.0, 1.0};
-    colors[1]  = {1.0, 0.0, 0.0, 1.0};
-    colors[2]  = {1.0, 0.0, 0.0, 1.0};
-    
-    colors[3]  = {1.0, 0.0, 0.0, 1.0};
-    colors[4]  = {1.0, 0.0, 0.0, 1.0};
-    colors[5]  = {1.0, 0.0, 0.0, 1.0};
-    
-    //right
-    colors[6]  = {0.0, 1.0, 0.0, 1.0};
-    colors[7]  = {0.0, 1.0, 0.0, 1.0};
-    colors[8]  = {0.0, 1.0, 0.0, 1.0};
-    
-    colors[9]  = {0.0, 1.0, 0.0, 1.0};
-    colors[10] = {0.0, 1.0, 0.0, 1.0};
-    colors[11] = {0.0, 1.0, 0.0, 1.0};
-    
-    //back
-    colors[12] = {0.0, 0.0, 1.0, 1.0};
-    colors[13] = {0.0, 0.0, 1.0, 1.0};
-    colors[14] = {0.0, 0.0, 1.0, 1.0};
-    
-    colors[15] = {0.0, 0.0, 1.0, 1.0};
-    colors[16] = {0.0, 0.0, 1.0, 1.0};
-    colors[17] = {0.0, 0.0, 1.0, 1.0};
-    
-    //left
-    colors[18] = {0.0, 1.0, 1.0, 1.0};
-    colors[19] = {0.0, 1.0, 1.0, 1.0};
-    colors[20] = {0.0, 1.0, 1.0, 1.0};
-    
-    colors[21] = {0.0, 1.0, 1.0, 1.0};
-    colors[22] = {0.0, 1.0, 1.0, 1.0};
-    colors[23] = {0.0, 1.0, 1.0, 1.0};
-    
-    //top
-    colors[24] = {1.0, 1.0, 1.0, 1.0};
-    colors[25] = {1.0, 1.0, 1.0, 1.0};
-    colors[26] = {1.0, 1.0, 1.0, 1.0};
-    
-    colors[27] = {1.0, 1.0, 1.0, 1.0};
-    colors[28] = {1.0, 1.0, 1.0, 1.0};
-    colors[29] = {1.0, 1.0, 1.0, 1.0};
-    
-    //bottom
-    colors[30] = {1.0, 0.0, 1.0, 1.0};
-    colors[31] = {1.0, 0.0, 1.0, 1.0};
-    colors[32] = {1.0, 0.0, 1.0, 1.0};
-    
-    colors[33] = {1.0, 0.0, 1.0, 1.0};
-    colors[34] = {1.0, 0.0, 1.0, 1.0};
-    colors[35] = {1.0, 0.0, 1.0, 1.0};
-    
-    self.colorBuffer = [device_ newBufferWithBytes:colors length:36*sizeof(simd::float4) options:0];
+    NSLog(@"Initialized maze with %ld triangles", self.vertexCount/3);
     
     return self;
 }
@@ -147,7 +90,219 @@
     if(self == nil)
         return nil;
     
+    //setup model matrix
+    self.modelMatrixBuffer = [device_ newBufferWithLength:sizeof(simd::float4x4) options:0];
+    self.modelMatrix = METL::translate(0.0, diameter_*0.5, 0.0);
+    
+    //generate vertices
+    self.vertexCount = 60;
+    
+    float radius = diameter_*0.5;
+    
+    float t = (1.0 + sqrtf(5.0))*0.5 * radius;
+    
+    simd::float3 v0 = {-radius,  t, 0.0};
+    simd::float3 v1 = { radius,  t, 0.0};
+    simd::float3 v2 = {-radius, -t, 0.0};
+    simd::float3 v3 = { radius, -t, 0.0};
+    
+    simd::float3 v4 = {0.0, -radius,  t};
+    simd::float3 v5 = {0.0,  radius,  t};
+    simd::float3 v6 = {0.0, -radius, -t};
+    simd::float3 v7 = {0.0,  radius, -t};
+    
+    simd::float3 v8  = {t,  0.0, -radius};
+    simd::float3 v9  = {t,  0.0,  radius};
+    simd::float3 v10 = {-t, 0.0, -radius};
+    simd::float3 v11 = {-t, 0.0,  radius};
+    
+    simd::float3 *vertexBuffer = (simd::float3 *)malloc(sizeof(simd::float3) * self.vertexCount);
+    
+    //first
+    vertexBuffer[0]  = v0;
+    vertexBuffer[1]  = v11;
+    vertexBuffer[2]  = v5;
+    
+    vertexBuffer[3]  = v0;
+    vertexBuffer[4]  = v5;
+    vertexBuffer[5]  = v1;
+    
+    vertexBuffer[6]  = v0;
+    vertexBuffer[7]  = v1;
+    vertexBuffer[8]  = v7;
+    
+    vertexBuffer[9]  = v0;
+    vertexBuffer[10] = v7;
+    vertexBuffer[11] = v10;
+    
+    vertexBuffer[12] = v0;
+    vertexBuffer[13] = v10;
+    vertexBuffer[14] = v11;
+    
+    //second
+    vertexBuffer[15] = v1;
+    vertexBuffer[16] = v5;
+    vertexBuffer[17] = v9;
+    
+    vertexBuffer[18] = v5;
+    vertexBuffer[19] = v11;
+    vertexBuffer[20] = v4;
+    
+    vertexBuffer[21] = v11;
+    vertexBuffer[22] = v10;
+    vertexBuffer[23] = v2;
+    
+    vertexBuffer[24] = v10;
+    vertexBuffer[25] = v7;
+    vertexBuffer[26] = v6;
+    
+    vertexBuffer[27] = v7;
+    vertexBuffer[28] = v1;
+    vertexBuffer[29] = v8;
+    
+    //third
+    vertexBuffer[30] = v3;
+    vertexBuffer[31] = v9;
+    vertexBuffer[32] = v4;
+
+    vertexBuffer[33] = v3;
+    vertexBuffer[34] = v4;
+    vertexBuffer[35] = v2;
+    
+    vertexBuffer[36] = v3;
+    vertexBuffer[37] = v2;
+    vertexBuffer[38] = v6;
+    
+    vertexBuffer[39] = v3;
+    vertexBuffer[40] = v6;
+    vertexBuffer[41] = v8;
+    
+    vertexBuffer[42] = v3;
+    vertexBuffer[43] = v8;
+    vertexBuffer[44] = v9;
+    
+    //fourth
+    vertexBuffer[45] = v4;
+    vertexBuffer[46] = v9;
+    vertexBuffer[47] = v5;
+    
+    vertexBuffer[48] = v2;
+    vertexBuffer[49] = v4;
+    vertexBuffer[50] = v11;
+    
+    vertexBuffer[51] = v6;
+    vertexBuffer[52] = v2;
+    vertexBuffer[53] = v10;
+    
+    vertexBuffer[54] = v8;
+    vertexBuffer[55] = v6;
+    vertexBuffer[56] = v7;
+    
+    vertexBuffer[57] = v9;
+    vertexBuffer[58] = v8;
+    vertexBuffer[59] = v1;
+    
+    self.vertexBuffer = [device_ newBufferWithBytes:vertexBuffer length:sizeof(simd::float3) * self.vertexCount options:0];
+    
+    free(vertexBuffer);
+    
+    //dummy colors
+    simd::float4 *colorBuffer = (simd::float4 *)malloc(sizeof(simd::float4) * self.vertexCount);
+    simd::float4 *colorPointer = colorBuffer;
+    
+    for(NSInteger i=0; i<60; i+=3) {
+        simd::float4 color;
+        color.x = arc4random()%1000/1000.0;
+        color.y = arc4random()%1000/1000.0;
+        color.z = arc4random()%1000/1000.0;
+        color.w = 1.0;
+        
+        colorPointer[0] = color;
+        colorPointer[1] = color;
+        colorPointer[2] = color;
+        
+        colorPointer += 3;
+    }
+    
+    self.colorBuffer = [device_ newBufferWithBytes:colorBuffer length:sizeof(simd::float4) * self.vertexCount options:0];
+    
+    free(colorBuffer);
+    
+    NSLog(@"Initialized ball with %ld triangles", self.vertexCount/3);
+    
     return self;
+}
+
+
+#pragma mark - Properties
+- (void)setModelMatrix:(simd::float4x4)modelMatrix_
+{
+    _modelMatrix = modelMatrix_;
+    
+    simd::float4x4 *bufferPointer = (simd::float4x4 *)[self.modelMatrixBuffer contents];
+    memcpy(bufferPointer, &_modelMatrix, sizeof(simd::float4x4));
+}
+
+
+#pragma mark - Internal Control
+- (NSInteger)boxFromPolygon:(Polygon *)polygon_ height:(CGFloat)height_ atAddress:(simd::float3 *)address_
+{
+    simd::float3 frontBottomLeft  = {float(polygon_.v1.x), 0.0,            float(polygon_.v1.y)};
+    simd::float3 frontBottomRight = {float(polygon_.v0.x), 0.0,            float(polygon_.v0.y)};
+    simd::float3 frontTopLeft     = {float(polygon_.v1.x), float(height_), float(polygon_.v1.y)};
+    simd::float3 frontTopRight     = {float(polygon_.v0.x), float(height_), float(polygon_.v0.y)};
+    
+    simd::float3 backBottomLeft  = {float(polygon_.v2.x), 0.0,            float(polygon_.v2.y)};
+    simd::float3 backBottomRight = {float(polygon_.v3.x), 0.0,            float(polygon_.v3.y)};
+    simd::float3 backTopLeft     = {float(polygon_.v2.x), float(height_), float(polygon_.v2.y)};
+    simd::float3 backTopRight    = {float(polygon_.v3.x), float(height_), float(polygon_.v3.y)};
+    
+    //front
+    address_[0] = frontBottomLeft;
+    address_[1] = frontTopLeft;
+    address_[2] = frontTopRight;
+    
+    address_[3] = frontBottomLeft;
+    address_[4] = frontTopRight;
+    address_[5] = frontBottomRight;
+    
+    //right
+    address_[6] = frontBottomRight;
+    address_[7] = frontTopRight;
+    address_[8] = backTopRight;
+    
+    address_[9] = frontBottomRight;
+    address_[10] = backTopRight;
+    address_[11] = backBottomRight;
+    
+    //back
+    address_[12] = backBottomRight;
+    address_[13] = backTopRight;
+    address_[14] = backTopLeft;
+    
+    address_[15] = backBottomRight;
+    address_[16] = backTopLeft;
+    address_[17] = backBottomLeft;
+    
+    //left
+    address_[18] = backBottomLeft;
+    address_[19] = backTopLeft;
+    address_[20] = frontTopLeft;
+    
+    address_[21] = backBottomLeft;
+    address_[22] = frontTopLeft;
+    address_[23] = frontBottomLeft;
+    
+    //top
+    address_[24] = frontTopLeft;
+    address_[25] = backTopLeft;
+    address_[26] = backTopRight;
+    
+    address_[27] = frontTopLeft;
+    address_[28] = backTopRight;
+    address_[29] = frontTopRight;
+    
+    return 30;
 }
 
 @end
