@@ -25,6 +25,7 @@
 @property (nonatomic, strong) id<MTLBuffer> modelMatrixBuffer;
 
 @property (nonatomic, assign) simd::float4x4 modelMatrix;
+@property (nonatomic, assign) CGPoint ballPosition;
 
 //Initialization
 - (instancetype)initMazeModelWithDevice:(id<MTLDevice>)device_ maze:(Maze *)maze_;

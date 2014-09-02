@@ -62,7 +62,7 @@
     MTLRenderPipelineDescriptor *pipeDesc = [MTLRenderPipelineDescriptor new];
     pipeDesc.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
     [pipeDesc setDepthAttachmentPixelFormat:MTLPixelFormatDepth32Float];
-    pipeDesc.sampleCount = 1;
+    pipeDesc.sampleCount = 4;
     
     id<MTLFunction> vertProg = [self.library newFunctionWithName:@"default_vert"];
     pipeDesc.vertexFunction = vertProg;
@@ -74,15 +74,27 @@
     //Pass Descriptor
     self.passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
     
-    //Create color attachement for pass descriptor
+    //Create multisampled color attachement for pass descriptor
     self.passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
+    self.passDescriptor.colorAttachments[0].storeAction = MTLStoreActionMultisampleResolve;
     self.passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.2, 0.2, 0.2, 1.0);
+    
+    MTLTextureDescriptor *multisampledTextureDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatBGRA8Unorm
+                                                                                                       width:rendererView_.frame.size.width
+                                                                                                      height:rendererView_.frame.size.height
+                                                                                                   mipmapped:NO];
+    multisampledTextureDesc.textureType = MTLTextureType2DMultisample;
+    multisampledTextureDesc.sampleCount = 4;
+    id<MTLTexture> multisampledTexture = [self.device newTextureWithDescriptor:multisampledTextureDesc];
+    self.passDescriptor.colorAttachments[0].texture = multisampledTexture;
     
     //Create depth buffer attachement for pass descriptor
     MTLTextureDescriptor *depthTextureDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatDepth32Float
                                                                                                 width:rendererView_.frame.size.width
                                                                                                height:rendererView_.frame.size.height
                                                                                             mipmapped:NO];
+    depthTextureDesc.textureType = MTLTextureType2DMultisample;
+    depthTextureDesc.sampleCount = 4;
     id<MTLTexture> depthTexture = [self.device newTextureWithDescriptor:depthTextureDesc];
     self.passDescriptor.depthAttachment.texture = depthTexture;
     self.passDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
@@ -108,7 +120,7 @@
     CGFloat aspectRatio = rendererView_.frame.size.width/rendererView_.frame.size.height;
     self.uniforms->projectionMatrix = METL::perspective_fov(65.0, aspectRatio, 0.1, 1500.0);
     
-    simd::float3 eye = {0.0, 600.0, -600.0};
+    simd::float3 eye = {0.0, 300.0, -300.0};
     simd::float3 center = {0.0, 0.0, 0.0};
     simd::float3 up = {0.0, 1.0, 0.0};
     self.uniforms->viewMatrix = METL::lookAt(eye, center, up);
@@ -134,7 +146,8 @@
 {
     _ballPosition = ballPosition_;
     
-    self.ballModel.modelMatrix = METL::translate(ballPosition_.x, 5.0, ballPosition_.y);
+    //self.ballModel.modelMatrix = METL::translate(ballPosition_.x, 5.0, ballPosition_.y);
+    self.ballModel.ballPosition = ballPosition_;
 }
 
 
@@ -149,7 +162,7 @@
     
     //Get Drawable
     id<CAMetalDrawable> drawable = [(CAMetalLayer *)self.rendererView.layer nextDrawable];
-    self.passDescriptor.colorAttachments[0].texture = drawable.texture;
+    self.passDescriptor.colorAttachments[0].resolveTexture = drawable.texture;
     
     //Create Command Encoder
     id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:self.passDescriptor];

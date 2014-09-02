@@ -72,7 +72,7 @@ class GameVC: UIViewController {
     override func viewDidLoad()
     {
         //Data Model
-        self.maze = Maze(thetaWithLevelMultipliers: [1, 4, 2, 1, 2, 2, 1, 1], levelSize: 30.0, wallSize:20.0)
+        self.maze = Maze(thetaWithLevelMultipliers: [1, 4, 2, 1, 2, 2, 1, 1], levelSize: 200.0, wallSize:20.0)
         self.maze?.generateMaze(fromNode: self.maze!.nodes[MazeNodePosition(level: 0, index: 0)]!, usingAlgorithm: .RecursiveBacktracker)
         
         //Graphics

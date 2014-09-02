@@ -9,8 +9,18 @@
 #import "Model.h"
 #import <simd/simd.h>
 #import "METLTransforms.h"
+#import <math.h>
+#import <Metal/Metal.h>
 
 #import "Super_Maze-Swift.h"
+
+
+@interface Model ()
+
+@property (nonatomic, assign) CGFloat ballCircumference;
+@property (nonatomic, assign) CGFloat ballDiameter;
+
+@end
 
 
 @implementation Model
@@ -89,6 +99,9 @@
     self = [super init];
     if(self == nil)
         return nil;
+    
+    self.ballDiameter = diameter_;
+    self.ballCircumference = M_PI * diameter_;
     
     //setup model matrix
     self.modelMatrixBuffer = [device_ newBufferWithLength:sizeof(simd::float4x4) options:0];
@@ -241,6 +254,24 @@
     
     simd::float4x4 *bufferPointer = (simd::float4x4 *)[self.modelMatrixBuffer contents];
     memcpy(bufferPointer, &_modelMatrix, sizeof(simd::float4x4));
+}
+
+
+- (void)setBallPosition:(CGPoint)ballPosition_
+{
+    _ballPosition = ballPosition_;
+    
+    CGFloat xRatio = ballPosition_.x/self.ballCircumference;
+    CGFloat yRatio = ballPosition_.y/self.ballCircumference;
+    
+    CGFloat xAngle = fmod(yRatio * 360.0, 360.0);
+    CGFloat zAngle = -fmod(xRatio * 360.0, 360.0);
+
+    simd::float4x4 translate = METL::translate(ballPosition_.x, self.ballDiameter*0.5, ballPosition_.y);
+    simd::float4x4 rotateX = METL::rotate(xAngle, 1.0, 0.0, 0.0);
+    simd::float4x4 rotateZ = METL::rotate(zAngle, 0.0, 0.0, 1.0);
+    
+    self.modelMatrix = translate * (rotateZ * rotateX);
 }
 
 
